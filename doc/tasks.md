@@ -10,12 +10,12 @@ Presenting some thank you message at the end
  * present textbox
  - present submit button
  - present exact images manually selected
-
+```
             IMG1 
      IMG2 IMG3 IMG4 IMG5 
         _TEXTBOX_ 
         "submit"
-        
+```      
         
 - user selects one of the bottom 4 imgs
 - save selection and textbox input
