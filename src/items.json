@@ -1,0 +1,14 @@
+{
+    "items": [
+        {
+                "linking_word": "bear",
+                "target": "1A",
+                "cues": ["1A", "1B", "1C", "1D"]
+        },
+        {
+                "linking_word": "dog",
+                "target": "1A",
+                "cues": ["1A", "1B", "1C", "1D"]
+        },
+    ]
+}
