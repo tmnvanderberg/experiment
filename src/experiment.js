@@ -38,72 +38,45 @@ import {initJsPsych} from 'jspsych';
 export async function run({assetPaths, input = {}, environment}) {
     const jsPsych = initJsPsych();
 
-    const timeline = [];
+    const intro = {
+        timeline: [{
+            type: HtmlKeyboardResponsePlugin,
+            stimulus: '<p>Welcome to pris stimuli experiment!<p/>',
+        }]
+    };
+    
+    // const items = require("src/items.json")
 
-    // Preload assets
-    timeline.push({
+    const five_images_procedure = {
+        timeline: [{
+            type: HtmlKeyboardResponsePlugin,
+            // stimulus: '<img src="media/images/1A.jpg">',
+            stimulus: function() {
+                var html = `<img
+                src="media/images/${jsPsych.timelineVariable('target')}.jpg">`;
+                let cues = jsPsych.timelineVariable('cues');
+                for (let i = 0; i != cues.length; ++i) {
+                    html += `<img src="media/images/${cues[i]}.jpg">`;
+                }
+        return html;
+            },
+            choices: ['J', 'K']
+        }],
+        timeline_variables: [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
+    };
+
+    var preload = {
         type: PreloadPlugin,
         images: assetPaths.images,
-        audio: assetPaths.audio,
-        video: assetPaths.video,
-    });
-
-    // Welcome screen
-    timeline.push({
-        type: HtmlKeyboardResponsePlugin,
-        stimulus: '<p>Welcome to pris stimuli experiment!<p/>',
-    });
-
-    // Switch to fullscreen
-    timeline.push({
-        type: FullscreenPlugin,
-        fullscreen_mode: true,
-    });
-
-    var instructions = {
-        type: HtmlKeyboardResponsePlugin,
-        stimulus: `
-    <p>In this experiment, a circle will appear in the center 
-    of the screen.</p><p>If the circle is <strong>blue</strong>, 
-    press the letter F on the keyboard as fast as you can.</p>
-    <p>If the circle is <strong>orange</strong>, press the letter J 
-    as fast as you can.</p>
-    <div style='width: 700px;'>
-    <div style='float: left;'><img src='img/blue.png'></img>
-    <p class='small'><strong>Press the F key</strong></p></div>
-    <div style='float: right;'><img src='img/orange.png'></img>
-    <p class='small'><strong>Press the J key</strong></p></div>
-    </div>
-    <p>Press any key to begin.</p>
-  `,
-        post_trial_gap: 2000
-    };
-    timeline.push(instructions);
-
-    // generate html that displays the stimuli images
-    // input relative paths of images
-    function generateStimulusHTML(img1, img2, img3, img4, img5) {
-        return '<img src="media/img/1A.jpg"><img src="media/img/1B.jpg">'
-    }
-
-    var blue_trial = {
-        type: ImageKeyboardResponsePlugin,
-        stimulus: generateStimulusHTML('', ''),
-        choices: ['f', 'j']
+        auto_preload: true,
+        error_message:
+            'The experiment failed to load. Please contact the researcher.'
     };
 
-    var orange_trial = {
-        type: ImageKeyboardResponsePlugin,
-        stimulus: 'media/images/orange.png',
-        choices: ['f', 'j']
-    };
+    await jsPsych.run([preload, intro, five_images_procedure]);
 
-    timeline.push(blue_trial, orange_trial);
-
-    await jsPsych.run(timeline);
-
-    // Return the jsPsych instance so jsPsych Builder can access the experiment
-    // results (remove this if you handle results yourself, be it here or in
-    // `on_finish()`)
+    // Return the jsPsych instance so jsPsych Builder can access the
+    // experiment results (remove this if you handle results
+    // yourself, be it here or in `on_finish()`)
     return jsPsych;
 }
