@@ -1,14 +1,406 @@
 {
     "items": [
+
         {
-                "linking_word": "bear",
-                "target": "1A",
+                "linking_word": "dog",
+                "target": "1T_dog",
                 "cues": ["1A", "1B", "1C", "1D"]
         },
         {
-                "linking_word": "monkey",
-                "target": "1A",
-                "cues": ["1A", "1B", "1C", "1D"]
+                "linking_word": "bath",
+                "target": "2T_bath",
+                "cues": ["2A", "2B", "2C", "2D"]
+        },
+        {
+                "linking_word": "justice",
+                "target": "3T_justice",
+                "cues": ["3A", "3B", "3C", "3D"]
+        },
+        {
+                "linking_word": "science",
+                "target": "4T_science",
+                "cues": ["4A", "4B", "4C", "4D"]
+        },
+        {
+                "linking_word": "feet",
+                "target": "5T_feet",
+                "cues": ["5A", "5B", "5C", "5D"]
+        },
+        {
+                "linking_word": "wood",
+                "target": "6T_wood",
+                "cues": ["6A", "6B", "6C", "6D"]
+        },
+        {
+                "linking_word": "safety",
+                "target": "7T_dog",
+                "cues": ["7A", "7B", "7C", "7D"]
+        },
+        {
+                "linking_word": "predict",
+                "target": "8T_predict",
+                "cues": ["8A", "8B", "8C", "8D"]
+        },
+        {
+                "linking_word": "security",
+                "target": "10T_dog",
+                "cues": ["10A", "10B", "10C", "10D"]
+        },
+        {
+                "linking_word": "slow",
+                "target": "11T_slow",
+                "cues": ["11A", "11B", "11C", "11D"]
+        },
+        {
+                "linking_word": "think",
+                "target": "12T_think",
+                "cues": ["12A", "12B", "12C", "12D"]
+        },
+        {
+                "linking_word": "leather",
+                "target": "13T_leather",
+                "cues": ["13A", "13B", "13C", "13D"]
+        },
+        {
+                "linking_word": "cube",
+                "target": "14T_cube",
+                "cues": ["14A", "14B", "14C", "14D"]
+        },
+        {
+                "linking_word": "alcohol",
+                "target": "15T_alcohol",
+                "cues": ["15A", "15B", "15C", "15D"]
+        },
+        {
+                "linking_word": "wax",
+                "target": "16T_wax",
+                "cues": ["16A", "16B", "16C", "16D"]
+        },
+        {
+                "linking_word": "small",
+                "target": "17T_small",
+                "cues": ["17A", "17B", "17C", "17D"]
+        },
+        {
+                "linking_word": "farm",
+                "target": "19T_farm",
+                "cues": ["19A", "19B", "19C", "19D"]
+        },
+        {
+                "linking_word": "hand",
+                "target": "20T_hand",
+                "cues": ["20A", "20B", "20C", "20D"]
+        },
+        {
+                "linking_word": "myth",
+                "target": "21T_myth",
+                "cues": ["21A", "21B", "21C", "21D"]
+        },
+        {
+                "linking_word": "race",
+                "target": "22T_race",
+                "cues": ["22A", "22B", "22C", "22D"]
+        },
+        {
+                "linking_word": "glass",
+                "target": "23T_glass",
+                "cues": ["23A", "23B", "23C", "23D"]
+        },
+        {
+                "linking_word": "cow",
+                "target": "24T_cow",
+                "cues": ["24A", "24B", "24C", "24D"]
+        },
+        {
+                "linking_word": "camp",
+                "target": "26T_camp",
+                "cues": ["26A", "26B", "26C", "26D"]
+        },
+        {
+                "linking_word": "potato",
+                "target": "27T_potato",
+                "cues": ["27A", "27B", "27C", "27D"]
+        },
+        {
+                "linking_word": "soft",
+                "target": "28T_soft",
+                "cues": ["28A", "28B", "28C", "28D"]
+        },
+        {
+                "linking_word": "dance",
+                "target": "29T_dance",
+                "cues": ["29A", "29B", "29C", "29D"]
+        },
+        {
+                "linking_word": "luck",
+                "target": "30T_luck",
+                "cues": ["30A", "30B", "30C", "30D"]
+        },
+        {
+                "linking_word": "ocean",
+                "target": "32T_ocean",
+                "cues": ["32A", "32B", "32C", "32D"]
+        },
+        {
+                "linking_word": "fight",
+                "target": "35T_fight",
+                "cues": ["35A", "35B", "35C", "35D"]
+        },
+        {
+                "linking_word": "jump",
+                "target": "36T_jump",
+                "cues": ["36A", "36B", "36C", "36D"]
+        },
+        {
+                "linking_word": "right",
+                "target": "37T_memory",
+                "cues": ["37A", "37B", "37C", "37D"]
+        },
+        {
+                "linking_word": "find",
+                "target": "39T_find",
+                "cues": ["39A", "39B", "39C", "39D"]
+        },
+        {
+                "linking_word": "neck",
+                "target": "40T_neck",
+                "cues": ["40A", "40B", "40C", "40D"]
+        },
+        {
+                "linking_word": "large",
+                "target": "41T_large",
+                "cues": ["41A", "41B", "41C", "41D"]
+        },
+        {
+                "linking_word": "wine",
+                "target": "42T_wine",
+                "cues": ["42A", "42B", "42C", "42D"]
+        },
+        {
+                "linking_word": "king",
+                "target": "44T_king",
+                "cues": ["44A", "44B", "44C", "44D"]
+        },
+        {
+                "linking_word": "party",
+                "target": "46T_party",
+                "cues": ["46A", "46B", "46C", "46D"]
+        },
+        {
+                "linking_word": "graduation",
+                "target": "47T_graduation",
+                "cues": ["47A", "47B", "47C", "47D"]
+        },
+        {
+                "linking_word": "knight",
+                "target": "48T_knight",
+                "cues": ["48A", "48B", "48C", "48D"]
+        },
+        {
+                "linking_word": "pool",
+                "target": "50T_pool",
+                "cues": ["50A", "50B", "50C", "50D"]
+        },
+        {
+                "linking_word": "shoes",
+                "target": "51T_shoes",
+                "cues": ["51A", "51B", "51C", "51D"]
+        },
+        {
+                "linking_word": "hat",
+                "target": "52T_hat",
+                "cues": ["52A", "52B", "52C", "52D"]
+        },
+        {
+                "linking_word": "rain",
+                "target": "53T_rain",
+                "cues": ["53A", "53B", "53C", "53D"]
+        },
+        {
+                "linking_word": "identification",
+                "target": "B6T_identification",
+                "cues": ["B6A", "B6B", "B6C", "B6D"]
+        },
+        {
+                "linking_word": "airport",
+                "target": "A2T_airport",
+                "cues": ["A2A", "A2B", "A2C", "A2D"]
+        },
+        {
+                "linking_word": "subway",
+                "target": "A6T_subway",
+                "cues": ["A6A", "A6B", "A6C", "A6D"]
+        },
+        {
+                "linking_word": "ninja",
+                "target": "A7T_ninja",
+                "cues": ["A7A", "A7B", "A7C", "A7D"]
+        },
+        {
+                "linking_word": "disco",
+                "target": "A9T_disco",
+                "cues": ["A9A", "A9B", "A9C", "A9D"]
+        },
+        {
+                "linking_word": "memory",
+                "target": "B4T_memory",
+                "cues": ["B4A", "B4B", "B4C", "B4D"]
+        },
+        {
+                "linking_word": "identification",
+                "target": "B6T_identification",
+                "cues": ["B6A", "B6B", "B6C", "B6D"]
+        },
+        {
+                "linking_word": "fast",
+                "target": "B7T_fast",
+                "cues": ["B7A", "B7B", "B7C", "B7D"]
+        },
+        {
+                "linking_word": "rough",
+                "target": "B8T_rough",
+                "cues": ["B8A", "B8B", "B8C", "B8D"]
+        },
+        {
+                "linking_word": "scent",
+                "target": "B9T_scent",
+                "cues": ["B9A", "B9B", "B9C", "B9D"]
+        },
+        {
+                "linking_word": "up",
+                "target": "B10T_up",
+                "cues": ["B10A", "B10B", "B10C", "B10D"]
+        },
+        {
+                "linking_word": "wait",
+                "target": "B11T_wait",
+                "cues": ["B11A", "B11B", "B11C", "B11D"]
+        },
+        {
+                "linking_word": "danger",
+                "target": "B12T_danger",
+                "cues": ["B12A", "B12B", "B12C", "B12D"]
+        },
+        {
+                "linking_word": "deliver",
+                "target": "C6T_deliver",
+                "cues": ["C6A", "C6B", "C6C", "C6D"]
+        },
+        {
+                "linking_word": "jagged",
+                "target": "C10T_jagged",
+                "cues": ["C10A", "C10B", "C10C", "C10D"]
+        },
+        {
+                "linking_word": "kiss",
+                "target": "C11T_kiss",
+                "cues": ["C11A", "C11B", "C11C", "C11D"]
+        },
+        {
+                "linking_word": "maple",
+                "target": "C12T_maple",
+                "cues": ["C12A", "C12B", "C12C", "C12D"]
+        },
+        {
+                "linking_word": "oil",
+                "target": "C14T_oil",
+                "cues": ["C14A", "C14B", "C14C", "C14D"]
+        },
+        {
+                "linking_word": "sand",
+                "target": "C15T_sand",
+                "cues": ["C15A", "C15B", "C15C", "C15D"]
+        },
+        {
+                "linking_word": "sting",
+                "target": "C17T_sting",
+                "cues": ["C17A", "C17B", "C17C", "C17D"]
+        },
+        {
+                "linking_word": "even",
+                "target": "C21T_even",
+                "cues": ["C21A", "C21B", "C21C", "C21D"]
+        },
+        {
+                "linking_word": "low",
+                "target": "C26T_sting",
+                "cues": ["C26A", "C26B", "C26C", "C26D"]
+        },
+        {
+                "linking_word": "plan",
+                "target": "C29T_plan",
+                "cues": ["C29A", "C29B", "C29C", "C29D"]
+        },
+        {
+                "linking_word": "religion",
+                "target": "C33T_religion",
+                "cues": ["C33A", "C33B", "C33C", "C33D"]
+        },
+        {
+                "linking_word": "sports",
+                "target": "C34T_sports",
+                "cues": ["C34A", "C34B", "C34C", "C34D"]
+        },
+        {
+                "linking_word": "real",
+                "target": "C40T_real",
+                "cues": ["C40A", "C40B", "C40C", "C40D"]
+        },
+        {
+                "linking_word": "alive",
+                "target": "C41T_alive",
+                "cues": ["C41A", "C41B", "C41C", "C41D"]
+        },
+        {
+                "linking_word": "iron",
+                "target": "C42T_iron",
+                "cues": ["C42A", "C42B", "C42C", "C42D"]
+        },
+        {
+                "linking_word": "net",
+                "target": "C43T_net",
+                "cues": ["C43A", "C43B", "C43C", "C43D"]
+        },
+        {
+                "linking_word": "hot",
+                "target": "D1T_hot",
+                "cues": ["D1A", "D1B", "D1C", "D1D"]
+        },
+        {
+                "linking_word": "crawl",
+                "target": "D2T_crawl",
+                "cues": ["D2A", "D2B", "D2C", "D2D"]
+        },
+        {
+                "linking_word": "blow",
+                "target": "D3T_blow",
+                "cues": ["D3A", "D3B", "D3C", "D3D"]
+        },
+        {
+                "linking_word": "pirate",
+                "target": "D4T_pirate",
+                "cues": ["D4A", "D4B", "D4C", "D4D"]
+        },
+        {
+                "linking_word": "police",
+                "target": "D5T_police",
+                "cues": ["D5A", "D5B", "D5C", "D5D"]
+        },{
+                "linking_word": "sick",
+                "target": "D6T_sick",
+                "cues": ["D6A", "D6B", "D6C", "D6D"]
+        },{
+                "linking_word": "bee",
+                "target": "D7T_bee",
+                "cues": ["D7A", "D7B", "D7C", "D8D"]
+        },{
+                "linking_word": "paint",
+                "target": "MJ1_paint",
+                "cues": ["MJ1A", "MJ1B", "MJ1C", "MJ1D"]
+        },{
+                "linking_word": "baby",
+                "target": "MJ2_baby",
+                "cues": ["MJ2A", "MJ2B", "MJ2C", "MJ2D"]
         },
     ]
 }
