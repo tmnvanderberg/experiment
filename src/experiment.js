@@ -3,9 +3,9 @@
  * @description pictures of bears
  * @version 0.1.0
  *
- * The following lines specify which media directories will be packaged and preloaded by jsPsych.
- * Modify them to arbitrary paths (or comma-separated lists of paths) within the `media` directory,
- * or just delete them.
+ * The following lines specify which media directories will be packaged and
+ * preloaded by jsPsych. Modify them to arbitrary paths (or comma-separated
+ * lists of paths) within the `media` directory, or just delete them.
  * @imageDir images
  * @audioDir audio
  * @videoDir video
@@ -13,51 +13,56 @@
  */
 
 // You can import stylesheets (.scss or .css).
-import "../styles/main.scss";
+import '../styles/main.scss';
 
-import { initJsPsych } from "jspsych";
-
-import FullscreenPlugin from "@jspsych/plugin-fullscreen";
-import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
-import PreloadPlugin from "@jspsych/plugin-preload";
-import ImageKeyboardResponsePlugin from "@jspsych/plugin-image-keyboard-response";
+import FullscreenPlugin from '@jspsych/plugin-fullscreen';
+import HtmlKeyboardResponsePlugin from '@jspsych/plugin-html-keyboard-response';
+import ImageKeyboardResponsePlugin from '@jspsych/plugin-image-keyboard-response';
+import PreloadPlugin from '@jspsych/plugin-preload';
+import {initJsPsych} from 'jspsych';
 
 /**
- * This method will be executed by jsPsych Builder and is expected to run the jsPsych experiment
+ * This method will be executed by jsPsych Builder and is expected to run the
+ * jsPsych experiment
  *
  * @param {object} options Options provided by jsPsych Builder
- * @param {any} [options.input] A custom object that can be specified via the JATOS web interface ("JSON study input").
- * @param {"development"|"production"|"jatos"} options.environment The context in which the experiment is run: `development` for `jspsych run`, `production` for `jspsych build`, and "jatos" if served by JATOS
- * @param {{images: string[]; audio: string[]; video: string[];, misc: string[];}} options.assetPaths An object with lists of file paths for the respective `@...Dir` pragmas
+ * @param {any} [options.input] A custom object that can be specified via the
+ *     JATOS web interface ("JSON study input").
+ * @param {"development"|"production"|"jatos"} options.environment The context
+ *     in which the experiment is run: `development` for `jspsych run`,
+ *     `production` for `jspsych build`, and "jatos" if served by JATOS
+ * @param {{images: string[]; audio: string[]; video: string[];, misc:
+ *     string[];}} options.assetPaths An object with lists of file paths for the
+ *     respective `@...Dir` pragmas
  */
-export async function run({ assetPaths, input = {}, environment }) {
-  const jsPsych = initJsPsych();
+export async function run({assetPaths, input = {}, environment}) {
+    const jsPsych = initJsPsych();
 
-  const timeline = [];
+    const timeline = [];
 
-  // Preload assets
-  timeline.push({
-    type: PreloadPlugin,
-    images: assetPaths.images,
-    audio: assetPaths.audio,
-    video: assetPaths.video,
-  });
+    // Preload assets
+    timeline.push({
+        type: PreloadPlugin,
+        images: assetPaths.images,
+        audio: assetPaths.audio,
+        video: assetPaths.video,
+    });
 
-  // Welcome screen
-  timeline.push({
-    type: HtmlKeyboardResponsePlugin,
-    stimulus: "<p>Welcome to pris stimuli experiment!<p/>",
-  });
+    // Welcome screen
+    timeline.push({
+        type: HtmlKeyboardResponsePlugin,
+        stimulus: '<p>Welcome to pris stimuli experiment!<p/>',
+    });
 
-  // Switch to fullscreen
-  timeline.push({
-    type: FullscreenPlugin,
-    fullscreen_mode: true,
-  });
+    // Switch to fullscreen
+    timeline.push({
+        type: FullscreenPlugin,
+        fullscreen_mode: true,
+    });
 
-  var instructions = {
-    type: HtmlKeyboardResponsePlugin,
-    stimulus: `
+    var instructions = {
+        type: HtmlKeyboardResponsePlugin,
+        stimulus: `
     <p>In this experiment, a circle will appear in the center 
     of the screen.</p><p>If the circle is <strong>blue</strong>, 
     press the letter F on the keyboard as fast as you can.</p>
@@ -71,28 +76,34 @@ export async function run({ assetPaths, input = {}, environment }) {
     </div>
     <p>Press any key to begin.</p>
   `,
-    post_trial_gap: 2000
-  };
-  timeline.push(instructions);
+        post_trial_gap: 2000
+    };
+    timeline.push(instructions);
 
+    // generate html that displays the stimuli images
+    // input relative paths of images
+    function generateStimulusHTML(img1, img2, img3, img4, img5) {
+        return '<img src="media/img/1A.jpg"><img src="media/img/1B.jpg">'
+    }
 
-  var blue_trial = {
-    type: ImageKeyboardResponsePlugin,
-    stimulus: 'media/images/blue.png',
-    choices: ['f', 'j']
-  };
-  
-  var orange_trial = {
-    type: ImageKeyboardResponsePlugin,
-    stimulus: 'media/images/orange.png',
-    choices: ['f', 'j']
-  };
+    var blue_trial = {
+        type: ImageKeyboardResponsePlugin,
+        stimulus: generateStimulusHTML('', ''),
+        choices: ['f', 'j']
+    };
 
-  timeline.push(blue_trial, orange_trial);
+    var orange_trial = {
+        type: ImageKeyboardResponsePlugin,
+        stimulus: 'media/images/orange.png',
+        choices: ['f', 'j']
+    };
 
-  await jsPsych.run(timeline);
+    timeline.push(blue_trial, orange_trial);
 
-  // Return the jsPsych instance so jsPsych Builder can access the experiment results (remove this
-  // if you handle results yourself, be it here or in `on_finish()`)
-  return jsPsych;
+    await jsPsych.run(timeline);
+
+    // Return the jsPsych instance so jsPsych Builder can access the experiment
+    // results (remove this if you handle results yourself, be it here or in
+    // `on_finish()`)
+    return jsPsych;
 }
