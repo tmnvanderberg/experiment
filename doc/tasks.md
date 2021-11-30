@@ -5,7 +5,7 @@ participants' selection as an integer from 1 to 7.  3) Presenting an array of pi
 box below it for participants to type in a word. (see second image I sent you). Save this word.  4)
 Presenting some thank you message at the end
 
-#task 1
+## task 1
  * present 5 images
  * present textbox
  - present submit button
