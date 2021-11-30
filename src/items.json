@@ -6,7 +6,7 @@
                 "cues": ["1A", "1B", "1C", "1D"]
         },
         {
-                "linking_word": "dog",
+                "linking_word": "monkey",
                 "target": "1A",
                 "cues": ["1A", "1B", "1C", "1D"]
         },
