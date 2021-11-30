@@ -1,1 +1,1 @@
-# experiment for univeristy of Vienna
+# experiment for university of Vienna
