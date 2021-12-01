@@ -61,7 +61,7 @@
     },
     {
         "linking_word": "safety",
-        "target": "7T_dog",  
+        "target": "7T_safety",  
         "comment": " does not exist",
         "cues": [
             "7A",
@@ -82,7 +82,7 @@
     },
     {
         "linking_word": "security",
-        "target": "10T_dog",
+        "target": "10T_security",
         "comment": " does not exist",
         "cues": [
             "10A",
@@ -303,7 +303,7 @@
     },
     {
         "linking_word": "right",
-        "target": "37T_memory",
+        "target": "37T_right",
         "comment": "does not exists.",
         "cues": [
             "37A",
@@ -644,7 +644,7 @@
     },
     {
         "linking_word": "low",
-        "target": "C26T_sting",
+        "target": "C26T_low",
         "comments": "does not exist",
         "cues": [
             "C26A",
@@ -791,12 +791,12 @@
             "D7A",
             "D7B",
             "D7C",
-            "D8D"
+            "D7D"
         ]
     },
     {
         "linking_word": "paint",
-        "target": "MJ1_paint",
+        "target": "MJ1_Paint",
         "comments": "does not exist",
         "cues": [
             "MJ1A",
@@ -807,7 +807,7 @@
     },
     {
         "linking_word": "baby",
-        "target": "MJ2_baby",
+        "target": "MJ2_Baby",
         "comments": "does not exist",
         "cues": [
             "MJ2A",
