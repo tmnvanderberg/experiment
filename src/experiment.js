@@ -19,8 +19,8 @@ import FullscreenPlugin from '@jspsych/plugin-fullscreen';
 import HtmlKeyboardResponsePlugin from '@jspsych/plugin-html-keyboard-response';
 import ImageKeyboardResponsePlugin from '@jspsych/plugin-image-keyboard-response';
 import PreloadPlugin from '@jspsych/plugin-preload';
-import semanticMemoryTaskPlugin from '../plugin-semantic-memory-task';
 import {initJsPsych} from 'jspsych';
+import semanticMemoryTask from 'tmnvanderberg-semantic-memory-task';
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -42,20 +42,18 @@ export async function run({assetPaths, input = {}, environment}) {
     const intro = {
         timeline: [{
             type: HtmlKeyboardResponsePlugin,
-            stimulus: '<p>Welcome to pris stimuli experiment!<p/>',
+            stimulus: '<p>HtmlKeyboardResponsePlugin / Welcome to pris stimuli experiment!<p/>',
         }]
     };
 
     const smt = {
         timeline: [{
-            type: semanticMemoryTaskPlugin,
+            type: semanticMemoryTask,
             words: 'The dog chased the car'
         }]
     }    
 
     const items = require("../items/first.json")
-
-    console.log(items)
 
     const five_images_procedure = {
         timeline: [{
