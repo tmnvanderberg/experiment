@@ -19,6 +19,7 @@ import FullscreenPlugin from '@jspsych/plugin-fullscreen';
 import HtmlKeyboardResponsePlugin from '@jspsych/plugin-html-keyboard-response';
 import ImageKeyboardResponsePlugin from '@jspsych/plugin-image-keyboard-response';
 import PreloadPlugin from '@jspsych/plugin-preload';
+import semanticMemoryTaskPlugin from '../plugin-semantic-memory-task';
 import {initJsPsych} from 'jspsych';
 
 /**
@@ -44,7 +45,14 @@ export async function run({assetPaths, input = {}, environment}) {
             stimulus: '<p>Welcome to pris stimuli experiment!<p/>',
         }]
     };
-    
+
+    const smt = {
+        timeline: [{
+            type: semanticMemoryTaskPlugin,
+            words: 'The dog chased the car'
+        }]
+    }    
+
     const items = require("../items/first.json")
 
     console.log(items)
@@ -74,7 +82,7 @@ export async function run({assetPaths, input = {}, environment}) {
             'The experiment failed to load. Please contact the researcher.'
     };
 
-    await jsPsych.run([preload, intro, five_images_procedure]);
+    await jsPsych.run([preload, intro, smt, five_images_procedure]);
 
     // Return the jsPsych instance so jsPsych Builder can access the
     // experiment results (remove this if you handle results
