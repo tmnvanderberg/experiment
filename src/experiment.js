@@ -45,15 +45,16 @@ export async function run({assetPaths, input = {}, environment}) {
         }]
     };
     
-    // const items = require("src/items.json")
+    const items = require("../items/first.json")
+
+    console.log(items)
 
     const five_images_procedure = {
         timeline: [{
             type: HtmlKeyboardResponsePlugin,
             // stimulus: '<img src="media/images/1A.jpg">',
             stimulus: function() {
-                var html = `<img
-                src="media/images/${jsPsych.timelineVariable('target')}.jpg">`;
+                var html = `<img src="media/images/${jsPsych.timelineVariable('target')}.jpg">`;
                 let cues = jsPsych.timelineVariable('cues');
                 for (let i = 0; i != cues.length; ++i) {
                     html += `<img src="media/images/${cues[i]}.jpg">`;
@@ -62,7 +63,7 @@ export async function run({assetPaths, input = {}, environment}) {
             },
             choices: ['J', 'K']
         }],
-        timeline_variables: [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
+        timeline_variables: items // [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
     };
 
     var preload = {
