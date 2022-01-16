@@ -7,6 +7,7 @@ This project was set up with https://github.com/bjoluc/jspsych-builder/.
 ## dependencies
 - jspsych
 - nodejs
+- https://github.com/tmnvanderberg/semantic-memory-task
 ##
 ```
 git clone git@github.com:tmnvanderberg/experiment.git
