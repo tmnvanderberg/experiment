@@ -1,2 +1,8 @@
+# git ignore
+
 node_modules
-img
+
+package-lock.json
+
+.jspsych-builder
+
