@@ -19,8 +19,8 @@ import FullscreenPlugin from '@jspsych/plugin-fullscreen';
 import HtmlKeyboardResponsePlugin from '@jspsych/plugin-html-keyboard-response';
 import ImageKeyboardResponsePlugin from '@jspsych/plugin-image-keyboard-response';
 import PreloadPlugin from '@jspsych/plugin-preload';
-import {initJsPsych} from 'jspsych';
-import semanticMemoryTask from 'tmnvanderberg-semantic-memory-task';
+import { initJsPsych } from 'jspsych';
+import SemanticMemoryTask from 'semantic-memory-task';
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -36,22 +36,15 @@ import semanticMemoryTask from 'tmnvanderberg-semantic-memory-task';
  *     string[];}} options.assetPaths An object with lists of file paths for the
  *     respective `@...Dir` pragmas
  */
-export async function run({assetPaths, input = {}, environment}) {
+export async function run({ assetPaths, input = {}, environment }) {
     const jsPsych = initJsPsych();
 
     const intro = {
         timeline: [{
-            type: HtmlKeyboardResponsePlugin,
+            type: SemanticMemoryTask,
             stimulus: '<p>HtmlKeyboardResponsePlugin / Welcome to pris stimuli experiment!<p/>',
         }]
     };
-
-    const smt = {
-        timeline: [{
-            type: semanticMemoryTask,
-            words: 'The dog chased the car'
-        }]
-    }    
 
     const items = require("../items/first.json")
 
@@ -59,13 +52,13 @@ export async function run({assetPaths, input = {}, environment}) {
         timeline: [{
             type: HtmlKeyboardResponsePlugin,
             // stimulus: '<img src="media/images/1A.jpg">',
-            stimulus: function() {
+            stimulus: function () {
                 var html = `<img src="media/images/${jsPsych.timelineVariable('target')}.jpg">`;
                 let cues = jsPsych.timelineVariable('cues');
                 for (let i = 0; i != cues.length; ++i) {
                     html += `<img src="media/images/${cues[i]}.jpg">`;
                 }
-        return html;
+                return html;
             },
             choices: ['J', 'K']
         }],
@@ -80,7 +73,7 @@ export async function run({assetPaths, input = {}, environment}) {
             'The experiment failed to load. Please contact the researcher.'
     };
 
-    await jsPsych.run([preload, intro, smt, five_images_procedure]);
+    await jsPsych.run([preload, intro, five_images_procedure]);
 
     // Return the jsPsych instance so jsPsych Builder can access the
     // experiment results (remove this if you handle results

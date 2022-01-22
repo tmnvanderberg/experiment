@@ -9,15 +9,16 @@
     "jatos": "npm run jspsych -- jatos"
   },
   "dependencies": {
-    "jspsych": "^7.0.0",
     "@jspsych/plugin-fullscreen": "^1.0.0",
     "@jspsych/plugin-html-keyboard-response": "^1.0.0",
-    "@jspsych/plugin-preload": "^1.0.0",
     "@jspsych/plugin-image-keyboard-response": "^1.0.0",
-    "tmnvanderberg-semantic-memory-task": "file:../semantic-memory-task"
+    "@jspsych/plugin-preload": "^1.0.0",
+    "jspsych": "^7.0.0",
+    "semantic-memory-task": "file:semantic-memory-task"
   },
   "devDependencies": {
-    "jspsych-builder": "^4.0.1"
+    "jspsych-builder": "^4.0.1",
+    "typescript": "^4.5.5"
   },
   "browserslist": ">0.25%, not dead"
 }
