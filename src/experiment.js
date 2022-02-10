@@ -13,14 +13,15 @@
  */
 
 // You can import stylesheets (.scss or .css).
-import '../styles/main.scss';
+import "../styles/main.scss";
 
-import FullscreenPlugin from '@jspsych/plugin-fullscreen';
-import HtmlKeyboardResponsePlugin from '@jspsych/plugin-html-keyboard-response';
-import ImageKeyboardResponsePlugin from '@jspsych/plugin-image-keyboard-response';
-import PreloadPlugin from '@jspsych/plugin-preload';
-import { initJsPsych } from 'jspsych';
-import SemanticMemoryTask from 'semantic-memory-task';
+import FullscreenPlugin from "@jspsych/plugin-fullscreen";
+// import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
+import ImageKeyboardResponsePlugin from "@jspsych/plugin-image-keyboard-response";
+import PreloadPlugin from "@jspsych/plugin-preload";
+import { initJsPsych } from "jspsych";
+import HtmlKeyboardResponsePlugin from "./plugin";
+// import SemanticMemoryTask from 'semantic-memory-task';
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -37,46 +38,54 @@ import SemanticMemoryTask from 'semantic-memory-task';
  *     respective `@...Dir` pragmas
  */
 export async function run({ assetPaths, input = {}, environment }) {
-    const jsPsych = initJsPsych();
+  const jsPsych = initJsPsych();
 
-    const intro = {
-        timeline: [{
-            type: SemanticMemoryTask,
-            stimulus: '<p>HtmlKeyboardResponsePlugin / Welcome to pris stimuli experiment!<p/>',
-        }]
-    };
+  const intro = {
+    timeline: [
+      {
+        type: HtmlKeyboardResponsePlugin,
+        stimulus:
+          "<p>HtmlKeyboardResponsePlugin / Welcome to pris stimuli experiment!<p/>",
+        choices: ["J", "K"],
+      },
+    ],
+  };
 
-    const items = require("../items/first.json")
+  const items = require("../items/first.json");
 
-    const five_images_procedure = {
-        timeline: [{
-            type: HtmlKeyboardResponsePlugin,
-            // stimulus: '<img src="media/images/1A.jpg">',
-            stimulus: function () {
-                var html = `<img src="media/images/${jsPsych.timelineVariable('target')}.jpg">`;
-                let cues = jsPsych.timelineVariable('cues');
-                for (let i = 0; i != cues.length; ++i) {
-                    html += `<img src="media/images/${cues[i]}.jpg">`;
-                }
-                return html;
-            },
-            choices: ['J', 'K']
-        }],
-        timeline_variables: items // [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
-    };
+  const five_images_procedure = {
+    timeline: [
+      {
+        type: HtmlKeyboardResponsePlugin,
+        // stimulus: '<img src="media/images/1A.jpg">',
+        stimulus: function () {
+          var html = `<img src="media/images/${jsPsych.timelineVariable(
+            "target"
+          )}.jpg">`;
+          let cues = jsPsych.timelineVariable("cues");
+          for (let i = 0; i != cues.length; ++i) {
+            html += `<img src="media/images/${cues[i]}.jpg">`;
+          }
+          return html;
+        },
+        choices: ["J", "K"],
+      },
+    ],
+    timeline_variables: items, // [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
+  };
 
-    var preload = {
-        type: PreloadPlugin,
-        images: assetPaths.images,
-        auto_preload: true,
-        error_message:
-            'The experiment failed to load. Please contact the researcher.'
-    };
+  var preload = {
+    type: PreloadPlugin,
+    images: assetPaths.images,
+    auto_preload: true,
+    error_message:
+      "The experiment failed to load. Please contact the researcher.",
+  };
 
-    await jsPsych.run([preload, intro, five_images_procedure]);
+  await jsPsych.run([preload, intro, five_images_procedure]);
 
-    // Return the jsPsych instance so jsPsych Builder can access the
-    // experiment results (remove this if you handle results
-    // yourself, be it here or in `on_finish()`)
-    return jsPsych;
+  // Return the jsPsych instance so jsPsych Builder can access the
+  // experiment results (remove this if you handle results
+  // yourself, be it here or in `on_finish()`)
+  return jsPsych;
 }

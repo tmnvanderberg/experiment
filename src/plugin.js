@@ -1,7 +1,7 @@
 import { JsPsych, JsPsychPlugin, ParameterType, TrialType } from "jspsych";
 
-const info = <const>{
-  name: "semantic-memory-task",
+const info = {
+  name: "html-keyboard-response",
   parameters: {
     /**
      * The HTML string to be displayed.
@@ -54,7 +54,7 @@ const info = <const>{
   },
 };
 
-type Info = typeof info;
+// type Info = typeof info;
 
 /**
  * **html-keyboard-response**
@@ -64,12 +64,15 @@ type Info = typeof info;
  * @author Josh de Leeuw
  * @see {@link https://www.jspsych.org/plugins/jspsych-html-keyboard-response/ html-keyboard-response plugin documentation on jspsych.org}
  */
-class SemanticMemoryTask implements JsPsychPlugin<Info> {
+class HtmlKeyboardResponsePlugin {
+  
   static info = info;
+  
+  constructor(jsPsych) { 
+    this.jsPsych = jsPsych;
+  }
 
-  constructor(private jsPsych: JsPsych) {}
-
-  trial(display_element: HTMLElement, trial: TrialType<Info>) {
+  trial = (display_element, trial) => {
     var new_html = '<div id="jspsych-html-keyboard-response-stimulus">' + trial.stimulus + "</div>";
 
     // add prompt
@@ -141,7 +144,7 @@ class SemanticMemoryTask implements JsPsychPlugin<Info> {
     // hide stimulus if stimulus_duration is set
     if (trial.stimulus_duration !== null) {
       this.jsPsych.pluginAPI.setTimeout(() => {
-        display_element.querySelector<HTMLElement>(
+        display_element.querySelector(
           "#jspsych-html-keyboard-response-stimulus"
         ).style.visibility = "hidden";
       }, trial.stimulus_duration);
@@ -154,10 +157,10 @@ class SemanticMemoryTask implements JsPsychPlugin<Info> {
   }
 
   simulate(
-    trial: TrialType<Info>,
+    trial,
     simulation_mode,
-    simulation_options: any,
-    load_callback: () => void
+    simulation_options,
+    load_callback
   ) {
     if (simulation_mode == "data-only") {
       load_callback();
@@ -168,7 +171,7 @@ class SemanticMemoryTask implements JsPsychPlugin<Info> {
     }
   }
 
-  private create_simulation_data(trial: TrialType<Info>, simulation_options) {
+  create_simulation_data = (trial, simulation_options) => {
     const default_data = {
       stimulus: trial.stimulus,
       rt: this.jsPsych.randomization.sampleExGaussian(500, 50, 1 / 150, true),
@@ -182,13 +185,13 @@ class SemanticMemoryTask implements JsPsychPlugin<Info> {
     return data;
   }
 
-  private simulate_data_only(trial: TrialType<Info>, simulation_options) {
+  simulate_data_only = (trial, simulation_options) => {
     const data = this.create_simulation_data(trial, simulation_options);
 
     this.jsPsych.finishTrial(data);
   }
 
-  private simulate_visual(trial: TrialType<Info>, simulation_options, load_callback: () => void) {
+  simulate_visual = (trial, simulation_options, load_callback) => {
     const data = this.create_simulation_data(trial, simulation_options);
 
     const display_element = this.jsPsych.getDisplayElement();
@@ -202,4 +205,4 @@ class SemanticMemoryTask implements JsPsychPlugin<Info> {
   }
 }
 
-export default SemanticMemoryTask;
+export default HtmlKeyboardResponsePlugin;
