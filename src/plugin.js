@@ -73,7 +73,7 @@ class HtmlKeyboardResponsePlugin {
   }
 
   trial = (display_element, trial) => {
-    var new_html = '<div id="jspsych-html-keyboard-response-stimulus">' + trial.stimulus + "</div>";
+    var new_html = '<div id="semantic-memory">' + trial.stimulus + "</div>";
 
     // add prompt
     if (trial.prompt !== null) {
@@ -117,7 +117,7 @@ class HtmlKeyboardResponsePlugin {
     var after_response = (info) => {
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
-      display_element.querySelector("#jspsych-html-keyboard-response-stimulus").className +=
+      display_element.querySelector("#semantic-memory").className +=
         " responded";
 
       // only record the first response
@@ -145,7 +145,7 @@ class HtmlKeyboardResponsePlugin {
     if (trial.stimulus_duration !== null) {
       this.jsPsych.pluginAPI.setTimeout(() => {
         display_element.querySelector(
-          "#jspsych-html-keyboard-response-stimulus"
+          "#semantic-memory"
         ).style.visibility = "hidden";
       }, trial.stimulus_duration);
     }

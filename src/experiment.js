@@ -46,33 +46,33 @@ export async function run({ assetPaths, input = {}, environment }) {
         type: HtmlKeyboardResponsePlugin,
         stimulus:
           "<p>HtmlKeyboardResponsePlugin / Welcome to pris stimuli experiment!<p/>",
-        choices: ["J", "K"],
+        choices: ["A", "S", "F", "J", "L"],
       },
     ],
   };
 
   const items = require("../items/first.json");
 
-  const five_images_procedure = {
-    timeline: [
-      {
-        type: HtmlKeyboardResponsePlugin,
-        // stimulus: '<img src="media/images/1A.jpg">',
-        stimulus: function () {
-          var html = `<img src="media/images/${jsPsych.timelineVariable(
-            "target"
-          )}.jpg">`;
-          let cues = jsPsych.timelineVariable("cues");
-          for (let i = 0; i != cues.length; ++i) {
-            html += `<img src="media/images/${cues[i]}.jpg">`;
-          }
-          return html;
-        },
-        choices: ["J", "K"],
-      },
-    ],
-    timeline_variables: items, // [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
-  };
+  // const five_images_procedure = {
+  //   timeline: [
+  //     {
+  //       type: HtmlKeyboardResponsePlugin,
+  //       // stimulus: '<img src="media/images/1A.jpg">',
+  //       stimulus: function () {
+  //         var html = `<img src="media/images/${jsPsych.timelineVariable(
+  //           "target"
+  //         )}.jpg">`;
+  //         let cues = jsPsych.timelineVariable("cues");
+  //         for (let i = 0; i != cues.length; ++i) {
+  //           html += `<img src="media/images/${cues[i]}.jpg">`;
+  //         }
+  //         return html;
+  //       },
+  //       choices: ["J", "K"],
+  //     },
+  //   ],
+  //   timeline_variables: items, // [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
+  // };
 
   var preload = {
     type: PreloadPlugin,
@@ -82,7 +82,7 @@ export async function run({ assetPaths, input = {}, environment }) {
       "The experiment failed to load. Please contact the researcher.",
   };
 
-  await jsPsych.run([preload, intro, five_images_procedure]);
+  await jsPsych.run([preload, intro]);
 
   // Return the jsPsych instance so jsPsych Builder can access the
   // experiment results (remove this if you handle results
