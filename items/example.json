@@ -1,0 +1,12 @@
+[
+  {
+    "linking_word": "dog",
+    "target": "1T_dog",
+    "cues": ["1A", "1B", "1C", "1D"]
+  },
+  {
+    "linking_word": "bath",
+    "target": "2T_bath",
+    "cues": ["2A", "2B", "2C", "2D"]
+  }
+]

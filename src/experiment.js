@@ -1,6 +1,6 @@
 /**
- * @title pris stimuli experiment
- * @description pictures of bears
+ * @title Semantic Memory Experiment
+ * @description <todo>
  * @version 0.1.0
  *
  * The following lines specify which media directories will be packaged and
@@ -14,15 +14,12 @@
 
 const _IMG_PREFIX_ = "media/images/first/";
 
-// You can import stylesheets (.scss or .css).
 import "../styles/main.scss";
 
 import FullscreenPlugin from "@jspsych/plugin-fullscreen";
-import ImageKeyboardResponsePlugin from "@jspsych/plugin-image-keyboard-response";
 import PreloadPlugin from "@jspsych/plugin-preload";
 import { initJsPsych } from "jspsych";
 import SemanticMemoryTaskPlugin from "./plugin";
-// import SemanticMemoryTask from 'semantic-memory-task';
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -41,48 +38,18 @@ import SemanticMemoryTaskPlugin from "./plugin";
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
 
-  const items = require("../items/first.json");
+  const items = require("../items/example.json");
   const intro = {
     timeline: [
       {
         type: SemanticMemoryTaskPlugin,
-        stimulus: function () {
-          let target = jsPsych.timelineVariable("target");
-          let cues = jsPsych.timelineVariable("cues");
-
-          let html = `<div class="stimuli">`;
-
-          html = `<img class="target" src="${
-            _IMG_PREFIX_ + target
-          }.jpg">`;
-          
-
-
-          html += `<div class="cues">`;
-          for (let i = 0; i != cues.length; ++i) {
-            html += `<img class="cue" src="${_IMG_PREFIX_ + cues[i]}.jpg">`;
-          }
-          html += `</div>`;
-
-          html += `<div class="question">`
-          html += "Which of the four images goes best with the top image?"
-          html += `</div>`
-
-          // html += `<div class="input">` 
-          // html += `
-          // <form class="form" action="/action_page.php">
-          // <label class="formlabel" for="fname">Please write one word that describes how the image you chose relates to the top image:</label>
-          // <input class="forminput" type="text" id="fname" name="fname"><br><br>
-          // <input class="button" type="submit" value="Submit">
-          // </form> 
-          // `
-          // html += `</div>`
-
-          html += `</div>`;
-
-          return html;
+        stimulus: () => {
+          return {
+            target: jsPsych.timelineVariable("target"),
+            cues: jsPsych.timelineVariable("cues"),
+            imagePrefix: _IMG_PREFIX_,
+          };
         },
-        choices: ["J", "K"],
       },
     ],
     timeline_variables: items,
@@ -101,5 +68,12 @@ export async function run({ assetPaths, input = {}, environment }) {
   // Return the jsPsych instance so jsPsych Builder can access the
   // experiment results (remove this if you handle results
   // yourself, be it here or in `on_finish()`)
+
+  let data = jsPsych.data.get();
+  let semantic_memory_trials = data.trials.filter((trial) => {
+    return trial.trial_type === "semantic-memory-task";
+  });
+  console.log("[semantic-memory-experiment] trials:\n", semantic_memory_trials);
+
   return jsPsych;
 }

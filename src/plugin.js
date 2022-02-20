@@ -1,4 +1,7 @@
 import { JsPsych, JsPsychPlugin, ParameterType, TrialType } from "jspsych";
+import jQuery from "jquery";
+
+window.$ = window.jQuery = jQuery;
 
 const info = {
   name: "semantic-memory-task",
@@ -10,14 +13,6 @@ const info = {
       type: ParameterType.HTML_STRING,
       pretty_name: "Stimulus",
       default: undefined,
-    },
-    /**
-     * Array containing the key(s) the subject is allowed to press to respond to the stimulus.
-     */
-    choices: {
-      type: ParameterType.KEYS,
-      pretty_name: "Choices",
-      default: "ALL_KEYS",
     },
     /**
      * Any content here will be displayed below the stimulus.
@@ -71,18 +66,42 @@ export default class SemanticMemoryTaskPlugin {
     this.jsPsych = jsPsych;
   }
 
+  // html for the form where user enter input
+  formHTML = () => {
+    return `<div class="semanticForm">
+                <label class="formLabel" for="fname">
+                  Please write one word that describes how the image you chose relates to the top image:
+                </label>
+                <input class="formText" type="text" id="semanticTextID" name="fname">
+                <input class="formButton" type="button" id="semanticButtonID" value="Submit"> 
+            </div>`;
+  };
+
+  // stimulus = {target, cues, imagePrefix}
+  stimulusHTML = (stimulus) => {
+    let html = `<div class="stimuli">
+                  <img class="target" src="${
+                    stimulus.imagePrefix + stimulus.target
+                  }.jpg">
+                <div class="cues">`;
+    for (let i = 0; i != stimulus.cues.length; ++i) {
+      html += `<img class="cue" src="${
+        stimulus.imagePrefix + stimulus.cues[i]
+      }.jpg">`;
+    }
+    html += `</div>
+            <div class="question">
+              "Which of the four images goes best with the top image?";
+            </div>`;
+    return html;
+  };
+
+  // the trial
   trial = (display_element, trial) => {
-    let input_html = `<div class="input">
-        <form class="form" name="textform">
-          <label class="formlabel" for="fname">Please write one word that describes how the image you chose relates to the top image:</label>
-          <input class="forminput" type="text" id="fname" name="fname"><br><br>
-          <input class="button" type="submit" value="Submit">
-        </form> 
-      </div>`;
-    var new_html =
+    let new_html =
       '<div id="semantic-memory" class="semantic-memory">' +
-      trial.stimulus +
-      input_html +
+      this.stimulusHTML(trial.stimulus) +
+      this.formHTML() +
       "</div>";
 
     // add prompt
@@ -93,27 +112,33 @@ export default class SemanticMemoryTaskPlugin {
     // draw
     display_element.innerHTML = new_html;
 
-    // store response
-    var response = {
-      rt: null,
-      key: null,
+    // define struct to store response
+    let response = {
+      text: null,
+      selectedCue: null,
     };
+
+    // handle response
+    $("#semanticButtonID").on("click", () => {
+      response.text = $("#semanticTextID").val();
+      console.log(
+        `[semantic-memory-task] Response text set to: "${response.text}"`
+      );
+      console.log(
+        `[semantic-memory-task] Response selectedCue set to: "${response.selectedCue}"`
+      );
+      after_response();
+    });
 
     // function to end trial when it is time
     const end_trial = () => {
       // kill any remaining setTimeout handlers
       this.jsPsych.pluginAPI.clearAllTimeouts();
 
-      // kill keyboard listeners
-      if (typeof keyboardListener !== "undefined") {
-        this.jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
-      }
-
       // gather the data to store for the trial
-      var trial_data = {
-        rt: response.rt,
+      let trial_data = {
         stimulus: trial.stimulus,
-        response: response.key,
+        response: response,
       };
 
       // clear the display
@@ -123,33 +148,14 @@ export default class SemanticMemoryTaskPlugin {
       this.jsPsych.finishTrial(trial_data);
     };
 
-    // function to handle responses by the subject
-    var after_response = (info) => {
-      // after a valid response, the stimulus will have the CSS class 'responded'
-      // which can be used to provide visual feedback that a response was recorded
+    // handle subject responses.
+    let after_response = (info) => {
       display_element.querySelector("#semantic-memory").className +=
         " responded";
-
-      // only record the first response
-      if (response.key == null) {
-        response = info;
-      }
-
       if (trial.response_ends_trial) {
         end_trial();
       }
     };
-
-    // start the response listener
-    if (trial.choices != "NO_KEYS") {
-      var keyboardListener = this.jsPsych.pluginAPI.getKeyboardResponse({
-        callback_function: after_response,
-        valid_responses: trial.choices,
-        rt_method: "performance",
-        persist: false,
-        allow_held_key: false,
-      });
-    }
 
     // hide stimulus if stimulus_duration is set
     if (trial.stimulus_duration !== null) {
@@ -179,7 +185,10 @@ export default class SemanticMemoryTaskPlugin {
     const default_data = {
       stimulus: trial.stimulus,
       rt: this.jsPsych.randomization.sampleExGaussian(500, 50, 1 / 150, true),
-      response: this.jsPsych.pluginAPI.getValidKey(trial.choices),
+      response: {
+        text: "_default_response_text_",
+        selectedCue: "_default_selected_cue_",
+      },
     };
 
     const data = this.jsPsych.pluginAPI.mergeSimulationData(
