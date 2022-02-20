@@ -1,7 +1,7 @@
 import { JsPsych, JsPsychPlugin, ParameterType, TrialType } from "jspsych";
 
 const info = {
-  name: "html-keyboard-response",
+  name: "semantic-memory-task",
   parameters: {
     /**
      * The HTML string to be displayed.
@@ -61,19 +61,29 @@ const info = {
  *
  * jsPsych plugin for displaying a stimulus and getting a keyboard response
  *
- * @author Josh de Leeuw
- * @see {@link https://www.jspsych.org/plugins/jspsych-html-keyboard-response/ html-keyboard-response plugin documentation on jspsych.org}
+ * @author Timon
+ *
  */
-class HtmlKeyboardResponsePlugin {
-  
+export default class SemanticMemoryTaskPlugin {
   static info = info;
-  
-  constructor(jsPsych) { 
+
+  constructor(jsPsych) {
     this.jsPsych = jsPsych;
   }
 
   trial = (display_element, trial) => {
-    var new_html = '<div id="semantic-memory">' + trial.stimulus + "</div>";
+    let input_html = `<div class="input">
+        <form class="form" name="textform">
+          <label class="formlabel" for="fname">Please write one word that describes how the image you chose relates to the top image:</label>
+          <input class="forminput" type="text" id="fname" name="fname"><br><br>
+          <input class="button" type="submit" value="Submit">
+        </form> 
+      </div>`;
+    var new_html =
+      '<div id="semantic-memory" class="semantic-memory">' +
+      trial.stimulus +
+      input_html +
+      "</div>";
 
     // add prompt
     if (trial.prompt !== null) {
@@ -144,9 +154,8 @@ class HtmlKeyboardResponsePlugin {
     // hide stimulus if stimulus_duration is set
     if (trial.stimulus_duration !== null) {
       this.jsPsych.pluginAPI.setTimeout(() => {
-        display_element.querySelector(
-          "#semantic-memory"
-        ).style.visibility = "hidden";
+        display_element.querySelector("#semantic-memory").style.visibility =
+          "hidden";
       }, trial.stimulus_duration);
     }
 
@@ -154,14 +163,9 @@ class HtmlKeyboardResponsePlugin {
     if (trial.trial_duration !== null) {
       this.jsPsych.pluginAPI.setTimeout(end_trial, trial.trial_duration);
     }
-  }
+  };
 
-  simulate(
-    trial,
-    simulation_mode,
-    simulation_options,
-    load_callback
-  ) {
+  simulate(trial, simulation_mode, simulation_options, load_callback) {
     if (simulation_mode == "data-only") {
       load_callback();
       this.simulate_data_only(trial, simulation_options);
@@ -178,18 +182,21 @@ class HtmlKeyboardResponsePlugin {
       response: this.jsPsych.pluginAPI.getValidKey(trial.choices),
     };
 
-    const data = this.jsPsych.pluginAPI.mergeSimulationData(default_data, simulation_options);
+    const data = this.jsPsych.pluginAPI.mergeSimulationData(
+      default_data,
+      simulation_options
+    );
 
     this.jsPsych.pluginAPI.ensureSimulationDataConsistency(trial, data);
 
     return data;
-  }
+  };
 
   simulate_data_only = (trial, simulation_options) => {
     const data = this.create_simulation_data(trial, simulation_options);
 
     this.jsPsych.finishTrial(data);
-  }
+  };
 
   simulate_visual = (trial, simulation_options, load_callback) => {
     const data = this.create_simulation_data(trial, simulation_options);
@@ -202,7 +209,5 @@ class HtmlKeyboardResponsePlugin {
     if (data.rt !== null) {
       this.jsPsych.pluginAPI.pressKey(data.response, data.rt);
     }
-  }
+  };
 }
-
-export default HtmlKeyboardResponsePlugin;

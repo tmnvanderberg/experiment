@@ -19,3 +19,12 @@ Presenting some thank you message at the end
         
 - user selects one of the bottom 4 imgs
 - save selection and textbox input
+
+
+
+
+## tododod
+- select image
+- save selection
+[x] move input to plugin
+- save textbox

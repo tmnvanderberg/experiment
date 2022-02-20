@@ -12,15 +12,16 @@
  * @miscDir misc
  */
 
+const _IMG_PREFIX_ = "media/images/first/";
+
 // You can import stylesheets (.scss or .css).
 import "../styles/main.scss";
 
 import FullscreenPlugin from "@jspsych/plugin-fullscreen";
-// import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
 import ImageKeyboardResponsePlugin from "@jspsych/plugin-image-keyboard-response";
 import PreloadPlugin from "@jspsych/plugin-preload";
 import { initJsPsych } from "jspsych";
-import HtmlKeyboardResponsePlugin from "./plugin";
+import SemanticMemoryTaskPlugin from "./plugin";
 // import SemanticMemoryTask from 'semantic-memory-task';
 
 /**
@@ -40,39 +41,52 @@ import HtmlKeyboardResponsePlugin from "./plugin";
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
 
+  const items = require("../items/first.json");
   const intro = {
     timeline: [
       {
-        type: HtmlKeyboardResponsePlugin,
-        stimulus:
-          "<p>HtmlKeyboardResponsePlugin / Welcome to pris stimuli experiment!<p/>",
-        choices: ["A", "S", "F", "J", "L"],
+        type: SemanticMemoryTaskPlugin,
+        stimulus: function () {
+          let target = jsPsych.timelineVariable("target");
+          let cues = jsPsych.timelineVariable("cues");
+
+          let html = `<div class="stimuli">`;
+
+          html = `<img class="target" src="${
+            _IMG_PREFIX_ + target
+          }.jpg">`;
+          
+
+
+          html += `<div class="cues">`;
+          for (let i = 0; i != cues.length; ++i) {
+            html += `<img class="cue" src="${_IMG_PREFIX_ + cues[i]}.jpg">`;
+          }
+          html += `</div>`;
+
+          html += `<div class="question">`
+          html += "Which of the four images goes best with the top image?"
+          html += `</div>`
+
+          // html += `<div class="input">` 
+          // html += `
+          // <form class="form" action="/action_page.php">
+          // <label class="formlabel" for="fname">Please write one word that describes how the image you chose relates to the top image:</label>
+          // <input class="forminput" type="text" id="fname" name="fname"><br><br>
+          // <input class="button" type="submit" value="Submit">
+          // </form> 
+          // `
+          // html += `</div>`
+
+          html += `</div>`;
+
+          return html;
+        },
+        choices: ["J", "K"],
       },
     ],
+    timeline_variables: items,
   };
-
-  const items = require("../items/first.json");
-
-  // const five_images_procedure = {
-  //   timeline: [
-  //     {
-  //       type: HtmlKeyboardResponsePlugin,
-  //       // stimulus: '<img src="media/images/1A.jpg">',
-  //       stimulus: function () {
-  //         var html = `<img src="media/images/${jsPsych.timelineVariable(
-  //           "target"
-  //         )}.jpg">`;
-  //         let cues = jsPsych.timelineVariable("cues");
-  //         for (let i = 0; i != cues.length; ++i) {
-  //           html += `<img src="media/images/${cues[i]}.jpg">`;
-  //         }
-  //         return html;
-  //       },
-  //       choices: ["J", "K"],
-  //     },
-  //   ],
-  //   timeline_variables: items, // [{target: '1A', cues: ['1B', '1C', '1D', '2A']}]
-  // };
 
   var preload = {
     type: PreloadPlugin,
