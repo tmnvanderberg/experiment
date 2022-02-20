@@ -16,10 +16,11 @@ const _IMG_PREFIX_ = "media/images/first/";
 
 import "../styles/main.scss";
 
-import FullscreenPlugin from "@jspsych/plugin-fullscreen";
-import PreloadPlugin from "@jspsych/plugin-preload";
 import { initJsPsych } from "jspsych";
 import SemanticMemoryTaskPlugin from "./plugin";
+import PreloadPlugin from "@jspsych/plugin-preload";
+
+import jquery from "jquery";
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -69,11 +70,17 @@ export async function run({ assetPaths, input = {}, environment }) {
   // experiment results (remove this if you handle results
   // yourself, be it here or in `on_finish()`)
 
-  let data = jsPsych.data.get();
-  let semantic_memory_trials = data.trials.filter((trial) => {
+  const data = jsPsych.data.get();
+  const semantic_memory_trials = data.trials.filter((trial) => {
     return trial.trial_type === "semantic-memory-task";
   });
   console.log("[semantic-memory-experiment] trials:\n", semantic_memory_trials);
+
+  const stringifiedTrials = JSON.stringify(semantic_memory_trials);
+
+  jquery.post("http://127.0.0.1:3005/", stringifiedTrials, () => {
+    console.log("[semantic-memory-experiment] successfully submitted results.");
+  });
 
   return jsPsych;
 }
