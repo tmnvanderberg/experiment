@@ -12,15 +12,15 @@
  * @miscDir misc
  */
 
+// prefix for the stimulus images
 const _IMG_PREFIX_ = "media/images/first/";
 
 import "../styles/main.scss";
 
 import { initJsPsych } from "jspsych";
+
 import SemanticMemoryTaskPlugin from "./plugin";
 import PreloadPlugin from "@jspsych/plugin-preload";
-
-import jquery from "jquery";
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -39,17 +39,15 @@ import jquery from "jquery";
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
 
-  const items = require("../items/example.json");
+  const items = require("../items/first.json");
   const intro = {
     timeline: [
       {
         type: SemanticMemoryTaskPlugin,
-        stimulus: () => {
-          return {
-            target: jsPsych.timelineVariable("target"),
-            cues: jsPsych.timelineVariable("cues"),
-            imagePrefix: _IMG_PREFIX_,
-          };
+        stimulus: {
+          target: jsPsych.timelineVariable("target"),
+          cues: jsPsych.timelineVariable("cues"),
+          imagePrefix: _IMG_PREFIX_,
         },
       },
     ],
@@ -66,21 +64,12 @@ export async function run({ assetPaths, input = {}, environment }) {
 
   await jsPsych.run([preload, intro]);
 
-  // Return the jsPsych instance so jsPsych Builder can access the
-  // experiment results (remove this if you handle results
-  // yourself, be it here or in `on_finish()`)
-
+  // check results
   const data = jsPsych.data.get();
   const semantic_memory_trials = data.trials.filter((trial) => {
     return trial.trial_type === "semantic-memory-task";
   });
   console.log("[semantic-memory-experiment] trials:\n", semantic_memory_trials);
-
-  const stringifiedTrials = JSON.stringify(semantic_memory_trials);
-
-  jquery.post("http://127.0.0.1:3005/", stringifiedTrials, () => {
-    console.log("[semantic-memory-experiment] successfully submitted results.");
-  });
 
   return jsPsych;
 }

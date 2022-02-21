@@ -7,20 +7,12 @@ const info = {
   name: "semantic-memory-task",
   parameters: {
     /**
-     * The HTML string to be displayed.
+     * Stimulus returns object { target: string, cues Array<string>, imagePrefix: string }
      */
     stimulus: {
-      type: ParameterType.HTML_STRING,
+      type: ParameterType.OBJECT,
       pretty_name: "Stimulus",
       default: undefined,
-    },
-    /**
-     * Any content here will be displayed below the stimulus.
-     */
-    prompt: {
-      type: ParameterType.HTML_STRING,
-      pretty_name: "Prompt",
-      default: null,
     },
     /**
      * How long to show the stimulus.
@@ -49,14 +41,11 @@ const info = {
   },
 };
 
-// type Info = typeof info;
-
 /**
- * **html-keyboard-response**
+ * **semantic-memory-task**
+ * jsPsych plugin for semantic memory task.
  *
- * jsPsych plugin for displaying a stimulus and getting a keyboard response
- *
- * @author Timon
+ * @author Timon van der Berg
  *
  */
 export default class SemanticMemoryTaskPlugin {
@@ -70,7 +59,7 @@ export default class SemanticMemoryTaskPlugin {
   formHTML = () => {
     return `<div class="semanticForm">
                 <label class="formLabel" for="fname">
-                  Please write one word that describes how the image you chose relates to the top image:
+                  Please write one word that describes how the image you chose relates to the top image.
                 </label>
                 <input class="formText" type="text" id="semanticTextID" name="fname">
                 <input class="formButton" type="button" id="semanticButtonID" value="Submit"> 
@@ -80,18 +69,20 @@ export default class SemanticMemoryTaskPlugin {
   // stimulus = {target, cues, imagePrefix}
   stimulusHTML = (stimulus) => {
     let html = `<div class="stimuli">
-                  <img class="target" src="${
-                    stimulus.imagePrefix + stimulus.target
-                  }.jpg">
+                  <img 
+                    class="target"
+                    src="${stimulus.imagePrefix + stimulus.target}.jpg"
+                  >
                 <div class="cues">`;
     for (let i = 0; i != stimulus.cues.length; ++i) {
-      html += `<img class="cue" src="${
-        stimulus.imagePrefix + stimulus.cues[i]
-      }.jpg">`;
+      html += `<img 
+                class="cue" 
+                id="stim-${stimulus.cues[i]}"
+                src="${stimulus.imagePrefix + stimulus.cues[i]}.jpg">`;
     }
     html += `</div>
             <div class="question">
-              "Which of the four images goes best with the top image?";
+              Which of the four images goes best with the top image?
             </div>`;
     return html;
   };
@@ -104,11 +95,6 @@ export default class SemanticMemoryTaskPlugin {
       this.formHTML() +
       "</div>";
 
-    // add prompt
-    if (trial.prompt !== null) {
-      new_html += trial.prompt;
-    }
-
     // draw
     display_element.innerHTML = new_html;
 
@@ -118,17 +104,43 @@ export default class SemanticMemoryTaskPlugin {
       selectedCue: null,
     };
 
-    // handle response
+    // handle using clicking submit
     $("#semanticButtonID").on("click", () => {
       response.text = $("#semanticTextID").val();
+      if (response.selectedCue === null || response.text === "") {
+        alert("Please select an image AND enter a word before submitting!.");
+        return;
+      }
       console.log(
-        `[semantic-memory-task] Response text set to: "${response.text}"`
-      );
-      console.log(
-        `[semantic-memory-task] Response selectedCue set to: "${response.selectedCue}"`
+        `[semantic-memory-task] Response: ${JSON.stringify(response)}`
       );
       after_response();
     });
+
+    // change selection helper
+    const select = (toSelectCue) => {
+      if (response.selectedCue === toSelectCue) {
+        return;
+      }
+      response.selectedCue = toSelectCue;
+      for (let cue of trial.stimulus.cues) {
+        let cueID = `#stim-${cue}`;
+        if (cue === toSelectCue) {
+          $(cueID).addClass("selectedCue");
+        } else {
+          $(cueID).removeClass("selectedCue");
+        }
+      }
+    };
+
+    // handle user selecting a cue
+    for (let cue of trial.stimulus.cues) {
+      let cueID = `#stim-${cue}`;
+      $(cueID).on("click", () => {
+        console.log(`[semantic-memory-task] SelectedCue: ${cue}`);
+        select(cue);
+      });
+    }
 
     // function to end trial when it is time
     const end_trial = () => {
