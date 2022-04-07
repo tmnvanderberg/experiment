@@ -16,5 +16,7 @@ npm install
 npm start
 ```
 
+## packaging for JATOS 
+``` npm run jatos ```
 
 
