@@ -6,7 +6,7 @@
     "jspsych": "jspsych -e experiment",
     "start": "npm run jspsych -- run",
     "build": "npm run jspsych -- build",
-    "jatos": "npm run jspsych -- jatos"
+    "jatos": "npm run jspsych build --jatos"
   },
   "dependencies": {
     "@jspsych/plugin-fullscreen": "^1.0.0",
