@@ -2,20 +2,19 @@
 
 This project was set up with https://github.com/bjoluc/jspsych-builder/. 
 
-# build instructions (linux)
+# build instructions
 
-## dependencies
-- jspsych
+## system dependencies
 - nodejs
 - nvm
-##
-```
-git clone git@github.com:tmnvanderberg/experiment.git
-cd experiment
-npm install
-npm start
-```
 
+# how to install 
+Clone the repo and run 
+`npm install`.
+## running local test server
+```
+npm run start
+```
 ## packaging for JATOS 
 ``` npm run jatos ```
 
