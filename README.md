@@ -6,7 +6,7 @@ This project was set up with https://github.com/bjoluc/jspsych-builder/.
 
 ## system dependencies
 - nodejs
-- nvm
+- npm
 
 # how to install 
 Clone the repo and run 
