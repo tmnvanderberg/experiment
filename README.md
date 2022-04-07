@@ -16,6 +16,8 @@ Clone the repo and run
 npm run start
 ```
 ## packaging for JATOS 
-``` npm run jatos ```
+``` 
+npm run jatos
+``
 
 
