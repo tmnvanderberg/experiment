@@ -111,9 +111,6 @@ export default class SemanticMemoryTaskPlugin {
         alert("Please select an image AND enter a word before submitting!.");
         return;
       }
-      console.log(
-        `[semantic-memory-task] Response: ${JSON.stringify(response)}`
-      );
       after_response();
     });
 
@@ -137,7 +134,6 @@ export default class SemanticMemoryTaskPlugin {
     for (let cue of trial.stimulus.cues) {
       let cueID = `#stim-${cue}`;
       $(cueID).on("click", () => {
-        console.log(`[semantic-memory-task] SelectedCue: ${cue}`);
         select(cue);
       });
     }

@@ -21,6 +21,7 @@ import { initJsPsych } from "jspsych";
 
 import SemanticMemoryTaskPlugin from "./plugin";
 import PreloadPlugin from "@jspsych/plugin-preload";
+import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -39,8 +40,21 @@ import PreloadPlugin from "@jspsych/plugin-preload";
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
 
+  let welcomeText = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `Willkommen!
+                  <div style='width: 700px;'>
+                    <img src='babelfisch.png'></img>
+                  </div>
+                  <p><a href=https://psy-ling.univie.ac.at/>psy-ling.univie.ac.at</a></p>
+                  <p> Bitte stellen Sie Ihren Browser auf Vollbildmodus.</>
+                  <p>Drücken Sie dann die Taste "a", um die Anweisungen anzuschauen.</p>
+                  `,
+    choices: "a",
+  };
+
   const items = require("../items/first.json");
-  const intro = {
+  const semanticMemoryExperiment = {
     timeline: [
       {
         type: SemanticMemoryTaskPlugin,
@@ -54,22 +68,14 @@ export async function run({ assetPaths, input = {}, environment }) {
     timeline_variables: items,
   };
 
-  var preload = {
+  let preload = {
     type: PreloadPlugin,
     images: assetPaths.images,
     auto_preload: true,
-    error_message:
-      "The experiment failed to load. Please contact the researcher.",
+    error_message: "The experiment failed to load. Please contact the researcher.",
   };
 
-  await jsPsych.run([preload, intro]);
-
-  // check results
-  const data = jsPsych.data.get();
-  const semantic_memory_trials = data.trials.filter((trial) => {
-    return trial.trial_type === "semantic-memory-task";
-  });
-  console.log("[semantic-memory-experiment] trials:\n", semantic_memory_trials);
+  await jsPsych.run([preload, welcomeText, semanticMemoryExperiment]);
 
   return jsPsych;
 }
