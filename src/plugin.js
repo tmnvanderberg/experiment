@@ -59,10 +59,10 @@ export default class SemanticMemoryTaskPlugin {
   formHTML = () => {
     return `<div class="semanticForm">
                 <label class="formLabel" for="fname">
-                  Please write one word that describes how the image you chose relates to the top image.
+                Bitte schreiben Sie ein Wort, das beschreibt, wie das von Ihnen gewählte Bild mit dem oberen Bild zusammenhängt.
                 </label>
                 <input class="formText" type="text" id="semanticTextID" name="fname">
-                <input class="formButton" type="button" id="semanticButtonID" value="Submit"> 
+                <input class="formButton" type="button" id="semanticButtonID" value="Abschicken"> 
             </div>`;
   };
 
@@ -82,7 +82,8 @@ export default class SemanticMemoryTaskPlugin {
     }
     html += `</div>
             <div class="question">
-              Which of the four images goes best with the top image?
+              Welches der vier Bilder passt am besten zu dem oberen Bild?
+
             </div>`;
     return html;
   };
@@ -108,7 +109,7 @@ export default class SemanticMemoryTaskPlugin {
     $("#semanticButtonID").on("click", () => {
       response.text = $("#semanticTextID").val();
       if (response.selectedCue === null || response.text === "") {
-        alert("Please select an image AND enter a word before submitting!.");
+        alert("Bitte wählen Sie ein Bild UND geben Sie ein Wort ein, bevor Sie es abschicken!");
         return;
       }
       after_response();
