@@ -24,6 +24,7 @@ import PreloadPlugin from "@jspsych/plugin-preload";
 import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
 import jsPsychSurveyText from '@jspsych/plugin-survey-text';
 import jsPsychInstructions from '@jspsych/plugin-instructions';
+import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
 
 
 
@@ -43,6 +44,11 @@ import jsPsychInstructions from '@jspsych/plugin-instructions';
  */
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
+
+  var enter_fullscreen = {
+    type: jsPsychFullscreen,
+    fullscreen_mode: true
+  };
 
   let welcomeText = {
     type: jsPsychHtmlKeyboardResponse,
@@ -102,7 +108,7 @@ export async function run({ assetPaths, input = {}, environment }) {
     error_message: "The experiment failed to load. Please contact the researcher.",
   };
 
-  await jsPsych.run([preload, subject, welcomeText, instructions, semanticMemoryExperiment]);
+  await jsPsych.run([preload, enter_fullscreen, subject, welcomeText, instructions, semanticMemoryExperiment]);
 
   return jsPsych;
 }
