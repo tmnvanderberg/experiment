@@ -1,4 +1,4 @@
-# Experiment for university of Vienna
+# Picture-word verification task
 
 This project was set up with https://github.com/bjoluc/jspsych-builder/. 
 
