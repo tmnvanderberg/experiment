@@ -21,12 +21,10 @@ import { initJsPsych } from "jspsych";
 
 import SemanticMemoryTaskPlugin from "./plugin";
 import PreloadPlugin from "@jspsych/plugin-preload";
-import jsPsychHtmlKeyboardResponse from '@jspsych/plugin-html-keyboard-response';
-import jsPsychSurveyText from '@jspsych/plugin-survey-text';
-import jsPsychInstructions from '@jspsych/plugin-instructions';
-import jsPsychFullscreen from '@jspsych/plugin-fullscreen';
-
-
+import jsPsychHtmlKeyboardResponse from "@jspsych/plugin-html-keyboard-response";
+import jsPsychSurveyText from "@jspsych/plugin-survey-text";
+import jsPsychInstructions from "@jspsych/plugin-instructions";
+import jsPsychFullscreen from "@jspsych/plugin-fullscreen";
 
 /**
  * This method will be executed by jsPsych Builder and is expected to run the
@@ -47,7 +45,7 @@ export async function run({ assetPaths, input = {}, environment }) {
 
   var enter_fullscreen = {
     type: jsPsychFullscreen,
-    fullscreen_mode: true
+    fullscreen_mode: true,
   };
 
   let welcomeText = {
@@ -63,7 +61,6 @@ export async function run({ assetPaths, input = {}, environment }) {
     choices: "a",
   };
 
-  
   var subject = {
     type: jsPsychSurveyText,
     questions: [
@@ -73,18 +70,18 @@ export async function run({ assetPaths, input = {}, environment }) {
         required: true,
       },
     ],
-    button_label: "Weiter"
-    };
+    button_label: "Weiter",
+  };
 
   var instructions = {
     type: jsPsychInstructions,
     pages: [
-    '<p><strong> Anweisungen</strong></p><p>Bitte wählen Sie das Bild aus der unteren Vierergruppe aus, das am besten zu dem oberen Bild passt. <p> Danach geben Sie bitte ein Wort ein, das am besten beschreibt, wie das von Ihnen gewählte Bild mit dem oberen Bild zusammenhängt.</p><p>Klicken Sie auf "Weiter", wenn Sie bereit sind, zu beginnen.</p>'
+      '<p><strong> Anweisungen</strong></p><p>Bitte wählen Sie das Bild aus der unteren Vierergruppe aus, das am besten zu dem oberen Bild passt. <p> Danach geben Sie bitte ein Wort ein, das am besten beschreibt, wie das von Ihnen gewählte Bild mit dem oberen Bild zusammenhängt.</p><p>Klicken Sie auf "Weiter", wenn Sie bereit sind, zu beginnen.</p>',
     ],
     button_label_next: "Weiter",
     button_label_previous: "Zurück",
-    show_clickable_nav: true
-}
+    show_clickable_nav: true,
+  };
 
   const items = require("../items/first.json");
   const semanticMemoryExperiment = {
@@ -105,10 +102,18 @@ export async function run({ assetPaths, input = {}, environment }) {
     type: PreloadPlugin,
     images: assetPaths.images,
     auto_preload: true,
-    error_message: "The experiment failed to load. Please contact the researcher.",
+    error_message:
+      "The experiment failed to load. Please contact the researcher.",
   };
 
-  await jsPsych.run([preload, enter_fullscreen, subject, welcomeText, instructions, semanticMemoryExperiment]);
+  await jsPsych.run([
+    preload,
+    enter_fullscreen,
+    subject,
+    welcomeText,
+    instructions,
+    semanticMemoryExperiment,
+  ]);
 
   return jsPsych;
 }
