@@ -61,7 +61,7 @@ export async function run({ assetPaths, input = {}, environment }) {
     choices: "a",
   };
 
-  var subject = {
+  let subject = {
     type: jsPsychSurveyText,
     questions: [
       {
@@ -73,7 +73,7 @@ export async function run({ assetPaths, input = {}, environment }) {
     button_label: "Weiter",
   };
 
-  var instructions = {
+  let instructions = {
     type: jsPsychInstructions,
     pages: [
       '<p><strong> Anweisungen</strong></p><p>Bitte wählen Sie das Bild aus der unteren Vierergruppe aus, das am besten zu dem oberen Bild passt. <p> Danach geben Sie bitte ein Wort ein, das am besten beschreibt, wie das von Ihnen gewählte Bild mit dem oberen Bild zusammenhängt.</p><p>Klicken Sie auf "Weiter", wenn Sie bereit sind, zu beginnen.</p>',
