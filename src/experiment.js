@@ -1,5 +1,5 @@
 /**
- * @title Semantic Memory Task
+ * @title Rating task for semantic memory task
  * @description <todo>
  * @version 0.1.0
  *
@@ -73,7 +73,12 @@ export async function run({ assetPaths, input = {}, environment }) {
         required: true,
       },
     ],
-    button_label: "Weiter"
+    button_label: "Weiter",
+    on_finish: function (data) {
+      let response = JSON.parse(JSON.stringify(data.response));
+      let code = response.Q0;
+      jsPsych.data.addProperties({ subject_ID: code });
+    },
     };
 
   var instructions = {
@@ -100,6 +105,8 @@ export async function run({ assetPaths, input = {}, environment }) {
     ],
     timeline_variables: items,
   };
+  var timestamp = (new Date).toISOString().replace(/z|t/gi,' ').trim();
+  jsPsych.data.addProperties({date: timestamp});
 
   let preload = {
     type: PreloadPlugin,
