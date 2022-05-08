@@ -76,7 +76,7 @@ export async function run({ assetPaths, input = {}, environment }) {
       let code = response.Q0;
       jsPsych.data.addProperties({ subject_ID: code });
     },
-    };
+  };
 
   let instructions = {
     type: jsPsychInstructions,
@@ -102,8 +102,8 @@ export async function run({ assetPaths, input = {}, environment }) {
     ],
     timeline_variables: items,
   };
-  var timestamp = (new Date).toISOString().replace(/z|t/gi,' ').trim();
-  jsPsych.data.addProperties({date: timestamp});
+  var timestamp = new Date().toISOString().replace(/z|t/gi, " ").trim();
+  jsPsych.data.addProperties({ date: timestamp });
 
   let preload = {
     type: PreloadPlugin,
@@ -121,6 +121,8 @@ export async function run({ assetPaths, input = {}, environment }) {
     instructions,
     semanticMemoryExperiment,
   ]);
+
+  jsPsych.data.get().localSave("csv", `WPV_subject${subject}_${timestamp}.csv`);
 
   return jsPsych;
 }

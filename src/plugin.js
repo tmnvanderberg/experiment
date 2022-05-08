@@ -127,7 +127,9 @@ export default class SemanticMemoryTaskPlugin {
         let cueID = `#stim-${cue}`;
         if (cue === toSelectCue) {
           $(cueID).addClass("selectedCue");
+          $(cueID).removeClass("cue");
         } else {
+          $(cueID).addClass("cue");
           $(cueID).removeClass("selectedCue");
         }
       }
