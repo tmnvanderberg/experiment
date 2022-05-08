@@ -109,7 +109,9 @@ export default class SemanticMemoryTaskPlugin {
     $("#semanticButtonID").on("click", () => {
       response.text = $("#semanticTextID").val();
       if (response.selectedCue === null || response.text === "") {
-        alert("Bitte wählen Sie ein Bild UND geben Sie ein Wort ein, bevor Sie es abschicken!");
+        alert(
+          "Bitte wählen Sie ein Bild UND geben Sie ein Wort ein, bevor Sie es abschicken!"
+        );
         return;
       }
       after_response();
