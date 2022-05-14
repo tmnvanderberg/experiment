@@ -122,7 +122,19 @@ export async function run({ assetPaths, input = {}, environment }) {
     semanticMemoryExperiment,
   ]);
 
-  jsPsych.data.get().localSave("csv", `WPV_subject${subject}_${timestamp}.csv`);
+  switch (environment) {
+    case "development":
+    case "production": {
+      jsPsych.data
+        .get()
+        .localSave("csv", `WPV_subject${subject}_${timestamp}.csv`);
+      break;
+    }
+    case "jatos": {
+      jatos.endStudy(jsPsych.data.get().json());
+      break;
+    }
+  }
 
   return jsPsych;
 }
