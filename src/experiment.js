@@ -43,9 +43,6 @@ import jsPsychFullscreen from "@jspsych/plugin-fullscreen";
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
 
-  console.log(`input is`, input);
-  console.log(`Starting JsPsych with environment ${environment}`);
-
   let enter_fullscreen = {
     type: jsPsychFullscreen,
     fullscreen_mode: true,
@@ -134,7 +131,7 @@ export async function run({ assetPaths, input = {}, environment }) {
       break;
     }
     case "jatos": {
-      jatos.endStudy(jsPsych.data.get().json());
+      jatos.endStudy(jsPsych.data.get().csv());
       break;
     }
   }
