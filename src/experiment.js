@@ -1,6 +1,6 @@
 /**
- * @title Rating task for semantic memory task
- * @description <todo>
+ * @title RatingTask
+ * @description Rating task for big fun
  * @version 0.1.0
  *
  * The following lines specify which media directories will be packaged and
@@ -43,7 +43,10 @@ import jsPsychFullscreen from "@jspsych/plugin-fullscreen";
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
 
-  var enter_fullscreen = {
+  console.log(`input is`, input);
+  console.log(`Starting JsPsych with environment ${environment}`);
+
+  let enter_fullscreen = {
     type: jsPsychFullscreen,
     fullscreen_mode: true,
   };
@@ -88,7 +91,7 @@ export async function run({ assetPaths, input = {}, environment }) {
     show_clickable_nav: true,
   };
 
-  const items = require("../items/first.json");
+  const items = require("../items/example.json");
   const semanticMemoryExperiment = {
     timeline: [
       {
