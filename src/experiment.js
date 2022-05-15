@@ -131,7 +131,6 @@ export async function run({ assetPaths, input = {}, environment }) {
       break;
     }
     case "jatos": {
-      jatos.endStudy(jsPsych.data.get().csv());
       break;
     }
   }

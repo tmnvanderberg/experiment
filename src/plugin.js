@@ -151,7 +151,10 @@ export default class SemanticMemoryTaskPlugin {
       // gather the data to store for the trial
       let trial_data = {
         stimulus: trial.stimulus,
+        target: trial.stimulus.target,
         response: response,
+        linkingWord: response.text,
+        selectedCue: response.selectedCue
       };
 
       // clear the display
