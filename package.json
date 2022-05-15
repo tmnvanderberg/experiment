@@ -20,7 +20,7 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "jspsych-builder": "^4.0.1"
+    "jspsych-builder": "https://github.com/tmnvanderberg/jspsych-builder/raw/main/jspsych-builder-4.2.1.tgz"
   },
   "browserslist": ">0.25%, not dead"
 }
