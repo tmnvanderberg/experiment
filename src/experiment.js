@@ -52,10 +52,7 @@ export async function run({ assetPaths, input = {}, environment }) {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `Willkommen!
                   <div style='width: 700px;'>
-                    <img src='../media/images/babelfisch.png'></img>
                   </div>
-                  <p><a href=https://psy-ling.univie.ac.at/>psy-ling.univie.ac.at</a></p>
-                  <p> Bitte stellen Sie Ihren Browser auf Vollbildmodus.</>
                   <p>Drücken Sie dann die Taste "a", um die Anweisungen anzuschauen.</p>
                   `,
     choices: "a",
