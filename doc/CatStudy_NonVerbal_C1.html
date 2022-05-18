@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
-    <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="jspsych-5.0.3/jspsych.js"></script>
+    <script src="jatos.js"></script>
+    <script src="practice_array.js"></script>
+    <script src="hit_array.js"></script>
+    <script src="images.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-survey-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-call-function.js"></script>
     <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
     <script src="jspsych-5.0.3/plugins/jspsych-text-button_V2.js"></script>
     <script src="jspsych-5.0.3/plugins/jspsych-text-button_V3.js"></script>
@@ -10,884 +16,222 @@
     <script src="jspsych-5.0.3/plugins/jspsych-button-response-revised_V3.js"></script>
     <script src="jspsych-5.0.3/plugins/jspsych-text-image-button_V2.js"></script>
     <script src="jspsych-5.0.3/plugins/jspsych-radiobutton-response-similarity.js"></script>
-    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/black-tie/jquery-ui.min.css" rel="stylesheet" type="text/css"></link>
-	<title>Cat Study NV C001</title>
-	</head>
-	<body>
-		<div id="jspsych-target"></div>
-	</body>
+    <link
+      href="jspsych-5.0.3/css/jspsych.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <link
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/black-tie/jquery-ui.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>Cat Study NV</title>
+  </head>
+  <body>
+    <div id="jspsych-target"></div>
+  </body>
 
-	<script>
+  <script>
+    let textBoxPresent = true; //ask for description
 
-	var textBoxPresent=true; //ask for description
-
-
-	function getUrlVars() {
-		var vars = {};
-		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-		vars[key] = value;
-		});
-		return vars;
-	}
-
-
-  var practice_array=[
-  {
-     "target": "2T_bath",
-     "choiceA": "2A",
-     "choiceB": "2B",
-     "choiceC": "2C",
-     "choiceD": "2D",
-     "correctAnswer": "2A"
-   },
-   {
-     "target": "29T_dance",
-     "choiceA": "29A",
-     "choiceB": "29B",
-     "choiceC": "29C",
-     "choiceD": "29D",
-     "correctAnswer": "29D"
-   },
-   {
-      "target": "47T_graduation",
-      "choiceA": "47A",
-      "choiceB": "47B",
-      "choiceC": "47C",
-      "choiceD": "47D",
-      "correctAnswer": "47D"
-    },
-    {
-      "target": "44T_king",
-      "choiceA": "44A",
-      "choiceB": "44B",
-      "choiceC": "44C",
-      "choiceD": "44D",
-      "correctAnswer": "44D"
-    }
-  ]
-
-var Hit_array=[
-  {
-    "target": "10T_security",
-    "choiceA": "10A",
-    "choiceB": "10B",
-    "choiceC": "10C",
-    "choiceD": "10D",
-    "correctAnswer": "10D"
-  },
-  {
-    "target": "11T_slow",
-    "choiceA": "11A",
-    "choiceB": "11B",
-    "choiceC": "11C",
-    "choiceD": "11D",
-    "correctAnswer": "11B"
-  },
-  {
-    "target": "12T_think",
-    "choiceA": "12A",
-    "choiceB": "12B",
-    "choiceC": "12C",
-    "choiceD": "12D",
-    "correctAnswer": "12B"
-  },
-  {
-    "target": "14T_cube",
-    "choiceA": "14A",
-    "choiceB": "14B",
-    "choiceC": "14C",
-    "choiceD": "14D",
-    "correctAnswer": "14C"
-  },
-  {
-    "target": "1T_dog",
-    "choiceA": "1A",
-    "choiceB": "1B",
-    "choiceC": "1C",
-    "choiceD": "1D",
-    "correctAnswer": "1B"
-  },
-  {
-    "target": "20T_hand",
-    "choiceA": "20A",
-    "choiceB": "20B",
-    "choiceC": "20C",
-    "choiceD": "20D",
-    "correctAnswer": "20C"
-  },
-  {
-    "target": "22T_race",
-    "choiceA": "22A",
-    "choiceB": "22B",
-    "choiceC": "22C",
-    "choiceD": "22D",
-    "correctAnswer": "22D"
-  },
-  {
-    "target": "23T_glass",
-    "choiceA": "23A",
-    "choiceB": "23B",
-    "choiceC": "23C",
-    "choiceD": "23D",
-    "correctAnswer": "23A"
-  },
-  {
-    "target": "24T_cow",
-    "choiceA": "24A",
-    "choiceB": "24B",
-    "choiceC": "24C",
-    "choiceD": "24D",
-    "correctAnswer": "24A"
-  },
-  {
-    "target": "25T_save",
-    "choiceA": "25A",
-    "choiceB": "25B",
-    "choiceC": "25C",
-    "choiceD": "25D",
-    "correctAnswer": "25A"
-  },
-  {
-    "target": "26T_camp",
-    "choiceA": "26A",
-    "choiceB": "26B",
-    "choiceC": "26C",
-    "choiceD": "26D",
-    "correctAnswer": "26B"
-  },
-  {
-    "target": "30T_luck",
-    "choiceA": "30A",
-    "choiceB": "30B",
-    "choiceC": "30C",
-    "choiceD": "30D",
-    "correctAnswer": "30C"
-  },
-  {
-    "target": "31T_turn",
-    "choiceA": "31A",
-    "choiceB": "31B",
-    "choiceC": "31C",
-    "choiceD": "31D",
-    "correctAnswer": "31B"
-  },
-  {
-    "target": "32T_ocean",
-    "choiceA": "32A",
-    "choiceB": "32B",
-    "choiceC": "32C",
-    "choiceD": "32D",
-    "correctAnswer": "32C"
-  },
-  {
-    "target": "33T_rare",
-    "choiceA": "33A",
-    "choiceB": "33B",
-    "choiceC": "33C",
-    "choiceD": "33D",
-    "correctAnswer": "33C"
-  },
-  {
-    "target": "35T_fight",
-    "choiceA": "35A",
-    "choiceB": "35B",
-    "choiceC": "35C",
-    "choiceD": "35D",
-    "correctAnswer": "35B"
-  },
-  {
-    "target": "36T_jump",
-    "choiceA": "36A",
-    "choiceB": "36B",
-    "choiceC": "36C",
-    "choiceD": "36D",
-    "correctAnswer": "36A"
-  },
-  {
-    "target": "40T_neck",
-    "choiceA": "40A",
-    "choiceB": "40B",
-    "choiceC": "40C",
-    "choiceD": "40D",
-    "correctAnswer": "40B"
-  },
-  {
-    "target": "42T_wine",
-    "choiceA": "42A",
-    "choiceB": "42B",
-    "choiceC": "42C",
-    "choiceD": "42D",
-    "correctAnswer": "42A"
-  },
-  {
-    "target": "46T_party",
-    "choiceA": "46A",
-    "choiceB": "46B",
-    "choiceC": "46C",
-    "choiceD": "46D",
-    "correctAnswer": "46B"
-  },
-  {
-    "target": "4T_science",
-    "choiceA": "4A",
-    "choiceB": "4B",
-    "choiceC": "4C",
-    "choiceD": "4D",
-    "correctAnswer": "4B"
-  },
-  {
-    "target": "53T_rain",
-    "choiceA": "53A",
-    "choiceB": "53B",
-    "choiceC": "53C",
-    "choiceD": "53D",
-    "correctAnswer": "53C"
-  },
-  {
-    "target": "5T_feet",
-    "choiceA": "5A",
-    "choiceB": "5B",
-    "choiceC": "5C",
-    "choiceD": "5D",
-    "correctAnswer": "5C"
-  },
-  {
-    "target": "7T_safety",
-    "choiceA": "7A",
-    "choiceB": "7B",
-    "choiceC": "7C",
-    "choiceD": "7D",
-    "correctAnswer": "7D"
-  },
-  {
-    "target": "A2T_airport",
-    "choiceA": "A2A",
-    "choiceB": "A2B",
-    "choiceC": "A2C",
-    "choiceD": "A2D",
-    "correctAnswer": "A2B"
-  },
-  {
-    "target": "A9T_disco",
-    "choiceA": "A9A",
-    "choiceB": "A9B",
-    "choiceC": "A9C",
-    "choiceD": "A9D",
-    "correctAnswer": "A9B"
-  },
-  {
-    "target": "B12T_danger",
-    "choiceA": "B12A",
-    "choiceB": "B12B",
-    "choiceC": "B12C",
-    "choiceD": "B12D",
-    "correctAnswer": "B12C"
-  },
-  {
-    "target": "B1T_through",
-    "choiceA": "B1A",
-    "choiceB": "B1B",
-    "choiceC": "B1C",
-    "choiceD": "B1D",
-    "correctAnswer": "B1B"
-  },
-  {
-    "target": "B2T_whole",
-    "choiceA": "B2A",
-    "choiceB": "B2B",
-    "choiceC": "B2C",
-    "choiceD": "B2D",
-    "correctAnswer": "B2B"
-  },
-  {
-    "target": "B7T_fast",
-    "choiceA": "B7A",
-    "choiceB": "B7B",
-    "choiceC": "B7C",
-    "choiceD": "B7D",
-    "correctAnswer": "B7D"
-  },
-  {
-    "target": "C11T_kiss",
-    "choiceA": "C11A",
-    "choiceB": "C11B",
-    "choiceC": "C11C",
-    "choiceD": "C11D",
-    "correctAnswer": "C11A"
-  },
-  {
-    "target": "C12T_maple",
-    "choiceA": "C12A",
-    "choiceB": "C12B",
-    "choiceC": "C12C",
-    "choiceD": "C12D",
-    "correctAnswer": "C12D"
-  },
-  {
-    "target": "C15T_sand",
-    "choiceA": "C15A",
-    "choiceB": "C15B",
-    "choiceC": "C15C",
-    "choiceD": "C15D",
-    "correctAnswer": "C15B"
-  },
-  {
-    "target": "C17T_sting",
-    "choiceA": "C17A",
-    "choiceB": "C17B",
-    "choiceC": "C17C",
-    "choiceD": "C17D",
-    "correctAnswer": "C17A"
-  },
-  {
-    "target": "C40T_real",
-    "choiceA": "C40A",
-    "choiceB": "C40B",
-    "choiceC": "C40C",
-    "choiceD": "C40D",
-    "correctAnswer": "C40B"
-  },
-  {
-    "target": "C42T_iron",
-    "choiceA": "C42A",
-    "choiceB": "C42B",
-    "choiceC": "C42C",
-    "choiceD": "C42D",
-    "correctAnswer": "C42C"
-  },
-  {
-    "target": "C43T_net",
-    "choiceA": "C43A",
-    "choiceB": "C43B",
-    "choiceC": "C43C",
-    "choiceD": "C43D",
-    "correctAnswer": "C43A"
-  },
-  {
-    "target": "D1T_hot",
-    "choiceA": "D1A",
-    "choiceB": "D1B",
-    "choiceC": "D1C",
-    "choiceD": "D1D",
-    "correctAnswer": "D1B"
-  },
-  {
-    "target": "D3T_blow",
-    "choiceA": "D3A",
-    "choiceB": "D3B",
-    "choiceC": "D3C",
-    "choiceD": "D3D",
-    "correctAnswer": "D3C"
-  },
-  {
-    "target": "MJ1_Paint",
-    "choiceA": "MJ1A",
-    "choiceB": "MJ1B",
-    "choiceC": "MJ1C",
-    "choiceD": "MJ1D",
-    "correctAnswer": "MJ1C"
-  },
-  {
-    "target": "13T_leather",
-    "choiceA": "13A",
-    "choiceB": "13B",
-    "choiceC": "13C",
-    "choiceD": "13D",
-    "correctAnswer": "13D"
-  },
-  {
-    "target": "15T_alcohol",
-    "choiceA": "15A",
-    "choiceB": "15B",
-    "choiceC": "15C",
-    "choiceD": "15D",
-    "correctAnswer": "15B"
-  },
-  {
-    "target": "16T_wax",
-    "choiceA": "16A",
-    "choiceB": "16B",
-    "choiceC": "16C",
-    "choiceD": "16D",
-    "correctAnswer": "16D"
-  },
-  {
-    "target": "17T_small",
-    "choiceA": "17A",
-    "choiceB": "17B",
-    "choiceC": "17C",
-    "choiceD": "17D",
-    "correctAnswer": "17C"
-  },
-  {
-    "target": "19T_farm",
-    "choiceA": "19A",
-    "choiceB": "19B",
-    "choiceC": "19C",
-    "choiceD": "19D",
-    "correctAnswer": "19C"
-  },
-  {
-    "target": "21T_myth",
-    "choiceA": "21A",
-    "choiceB": "21B",
-    "choiceC": "21C",
-    "choiceD": "21D",
-    "correctAnswer": "21B"
-  },
-  {
-    "target": "27T_potato",
-    "choiceA": "27A",
-    "choiceB": "27B",
-    "choiceC": "27C",
-    "choiceD": "27D",
-    "correctAnswer": "27A"
-  },
-  {
-    "target": "28T_soft",
-    "choiceA": "28A",
-    "choiceB": "28B",
-    "choiceC": "28C",
-    "choiceD": "28D",
-    "correctAnswer": "28C"
-  },
-  {
-    "target": "37T_right",
-    "choiceA": "37A",
-    "choiceB": "37B",
-    "choiceC": "37C",
-    "choiceD": "37D",
-    "correctAnswer": "37D"
-  },
-  {
-    "target": "39T_find",
-    "choiceA": "39A",
-    "choiceB": "39B",
-    "choiceC": "39C",
-    "choiceD": "39D",
-    "correctAnswer": "39C"
-  },
-  {
-    "target": "3T_justice",
-    "choiceA": "3A",
-    "choiceB": "3B",
-    "choiceC": "3C",
-    "choiceD": "3D",
-    "correctAnswer": "3B"
-  },
-  {
-    "target": "41T_large",
-    "choiceA": "41A",
-    "choiceB": "41B",
-    "choiceC": "41C",
-    "choiceD": "41D",
-    "correctAnswer": "41B"
-  },
-  {
-    "target": "48T_knight",
-    "choiceA": "48A",
-    "choiceB": "48B",
-    "choiceC": "48C",
-    "choiceD": "48D",
-    "correctAnswer": "48D"
-  },
-  {
-    "target": "50T_pool",
-    "choiceA": "50A",
-    "choiceB": "50B",
-    "choiceC": "50C",
-    "choiceD": "50D",
-    "correctAnswer": "50A"
-  },
-  {
-    "target": "51T_shoes",
-    "choiceA": "51A",
-    "choiceB": "51B",
-    "choiceC": "51C",
-    "choiceD": "51D",
-    "correctAnswer": "51D"
-  },
-  {
-    "target": "52T_hat",
-    "choiceA": "52A",
-    "choiceB": "52B",
-    "choiceC": "52C",
-    "choiceD": "52D",
-    "correctAnswer": "52B"
-  },
-  {
-    "target": "6T_wood",
-    "choiceA": "6A",
-    "choiceB": "6B",
-    "choiceC": "6C",
-    "choiceD": "6D",
-    "correctAnswer": "6A"
-  },
-  {
-    "target": "8T_predict",
-    "choiceA": "8A",
-    "choiceB": "8B",
-    "choiceC": "8C",
-    "choiceD": "8D",
-    "correctAnswer": "8B"
-  },
-  {
-    "target": "A6T_subway",
-    "choiceA": "A6A",
-    "choiceB": "A6B",
-    "choiceC": "A6C",
-    "choiceD": "A6D",
-    "correctAnswer": "A6B"
-  },
-  {
-    "target": "A7T_ninja",
-    "choiceA": "A7A",
-    "choiceB": "A7B",
-    "choiceC": "A7C",
-    "choiceD": "A7D",
-    "correctAnswer": "A7D"
-  },
-  {
-    "target": "B10T_up",
-    "choiceA": "B10A",
-    "choiceB": "B10B",
-    "choiceC": "B10C",
-    "choiceD": "B10D",
-    "correctAnswer": "B10A"
-  },
-  {
-    "target": "B11T_wait",
-    "choiceA": "B11A",
-    "choiceB": "B11B",
-    "choiceC": "B11C",
-    "choiceD": "B11D",
-    "correctAnswer": "B11D"
-  },
-  {
-    "target": "B4T_memory",
-    "choiceA": "B4A",
-    "choiceB": "B4B",
-    "choiceC": "B4C",
-    "choiceD": "B4D",
-    "correctAnswer": "B4D"
-  },
-  {
-    "target": "B6T_identification",
-    "choiceA": "B6A",
-    "choiceB": "B6B",
-    "choiceC": "B6C",
-    "choiceD": "B6D",
-    "correctAnswer": "B6A"
-  },
-  {
-    "target": "B8T_rough",
-    "choiceA": "B8A",
-    "choiceB": "B8B",
-    "choiceC": "B8C",
-    "choiceD": "B8D",
-    "correctAnswer": "B8C"
-  },
-  {
-    "target": "B9T_scent",
-    "choiceA": "B9A",
-    "choiceB": "B9B",
-    "choiceC": "B9C",
-    "choiceD": "B9D",
-    "correctAnswer": "B9C"
-  },
-  {
-    "target": "C10T_jagged",
-    "choiceA": "C10A",
-    "choiceB": "C10B",
-    "choiceC": "C10C",
-    "choiceD": "C10D",
-    "correctAnswer": "C10D"
-  },
-  {
-    "target": "C14T_oil",
-    "choiceA": "C14A",
-    "choiceB": "C14B",
-    "choiceC": "C14C",
-    "choiceD": "C14D",
-    "correctAnswer": "C14C"
-  },
-  {
-    "target": "C26T_low",
-    "choiceA": "C26A",
-    "choiceB": "C26B",
-    "choiceC": "C26C",
-    "choiceD": "C26D",
-    "correctAnswer": "C26A"
-  },
-  {
-    "target": "C29T_plan",
-    "choiceA": "C29A",
-    "choiceB": "C29B",
-    "choiceC": "C29C",
-    "choiceD": "C29D",
-    "correctAnswer": "C29C"
-  },
-  {
-    "target": "C33T_religion",
-    "choiceA": "C33A",
-    "choiceB": "C33B",
-    "choiceC": "C33C",
-    "choiceD": "C33D",
-    "correctAnswer": "C33B"
-  },
-  {
-    "target": "C34T_sports",
-    "choiceA": "C34A",
-    "choiceB": "C34B",
-    "choiceC": "C34C",
-    "choiceD": "C34D",
-    "correctAnswer": "C34C"
-  },
-  {
-    "target": "C41T_alive",
-    "choiceA": "C41A",
-    "choiceB": "C41B",
-    "choiceC": "C41C",
-    "choiceD": "C41D",
-    "correctAnswer": "C41C"
-  },
-  {
-    "target": "C44T_kick",
-    "choiceA": "C44A",
-    "choiceB": "C44B",
-    "choiceC": "C44C",
-    "choiceD": "C44D",
-    "correctAnswer": "C44B"
-  },
-  {
-    "target": "C6T_deliver",
-    "choiceA": "C6A",
-    "choiceB": "C6B",
-    "choiceC": "C6C",
-    "choiceD": "C6D",
-    "correctAnswer": "C6B"
-  },
-  {
-    "target": "D2T_crawl",
-    "choiceA": "D2A",
-    "choiceB": "D2B",
-    "choiceC": "D2C",
-    "choiceD": "D2D",
-    "correctAnswer": "D2D"
-  },
-  {
-    "target": "D4T_pirate",
-    "choiceA": "D4A",
-    "choiceB": "D4B",
-    "choiceC": "D4C",
-    "choiceD": "D4D",
-    "correctAnswer": "D4C"
-  },
-  {
-    "target": "D6T_sick",
-    "choiceA": "D6A",
-    "choiceB": "D6B",
-    "choiceC": "D6C",
-    "choiceD": "D6D",
-    "correctAnswer": "D6D"
-  },
-  {
-    "target": "D7T_bee",
-    "choiceA": "D7A",
-    "choiceB": "D7B",
-    "choiceC": "D7C",
-    "choiceD": "D7D",
-    "correctAnswer": "D7B"
-  },
-  {
-    "target": "MJ2_Baby",
-    "choiceA": "MJ2A",
-    "choiceB": "MJ2B",
-    "choiceC": "MJ2C",
-    "choiceD": "MJ2D",
-    "correctAnswer": "MJ2A"
-  }
- ]
-
-var prac_trials_array = jsPsych.randomization.shuffle(practice_array);
-var exp_trials_array = jsPsych.randomization.shuffle(Hit_array);
-
- var shuffle = function(a) {
-	var j, x, i;
-	for (i = a.length; i; i--) {
-		j = Math.floor(Math.random() * i);
-		x = a[i - 1];
-		a[i - 1] = a[j];
-		a[j] = x;
-	}
-	}
-
-  var makeid = function(){
-	  var text = "";
-	  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-	  for( var i=0; i < 5; i++ )
-		  text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-	  return text;
-  };
-
-      //Create Subject ID
-	  var subject_id = makeid() + 'iTi' + makeid()
-	  jsPsych.data.addProperties({
-	  subject: subject_id,
-	  workerId: getUrlVars()["workerId"],
-	});
-
-	//add introduction screen and instructions to the timeline
-	var timeline = [];
-
-  var welcome_block = {
-      type: "text",
-      text: "Welcome! Please maximize your browser window. Then, press any key to begin the experiment."
-  };
-	timeline.push(welcome_block);
-
-
-	//create function to turn image names into strings with correctly specified paths
-	function addImagePath(imageName) {
-		return "imgNew/"+imageName+".jpg"
-	}
-
-	instTarget=addImagePath("verbStudyexample");
- 	var instructions_block = {
-      	type: "text-image-button_V2",
-      	text: "<p><b>INSTRUCTIONS</b></p>" +
-      	  "<p>Thank you for participating.  On each screen, you will see an image at the top of the screen and four images below it.   You will be asked to select which of the four images best goes with the top image.</p>" +
-          "<p><b>In the example below, image A would be the correct answer, because the two rabbits go together.</b></p>"+
-          "<p>After making your choice, you will be asked to indicate how confident you are in your choice.  You may select:</p>"+
-          "<p><b>1 = I am just guessing; 2 = I am not confident; 3 = I am quite confident; or, 4 = I am very confident</b></p>" +
-          "<p><b>Touch the NEXT to continue.</b></p>",
-		stimulus: instTarget
-    	};
-
-    timeline.push(instructions_block);
-
-    var practice_instructions = {
-         type: "text-button_V2",
-         text: "<p>For the next <b>four practice trials</b>, please select the image that best goes with the top image, and then rate your confidence.</p>" +
-               "<p>Touch the START button to begin.</p>"
-       };
-
-   timeline.push(practice_instructions);
-
-    // Set Non-verbal Practice Trials
-  	for (i=0;i<prac_trials_array.length;i++) {
-
-  		//define key variables based on test trialList (test_array)
-  		target=addImagePath(prac_trials_array[i].target);
-  		choices=[addImagePath(prac_trials_array[i].choiceA),addImagePath(prac_trials_array[i].choiceB),addImagePath(prac_trials_array[i].choiceC),addImagePath(prac_trials_array[i].choiceD)];
-  		choicesRND = jsPsych.randomization.shuffle(choices);
-  		correctAnswer=addImagePath(prac_trials_array[i].correctAnswer);
-
-  		var practice_trial = {
-  			type: 'button-response-revised_V3',
-  			randomize_order: true,
-  			//timing_response: -1,
-  			prompt: "Which of the four images best goes with the top image?",
-  			stimulus: target,
-  			choices: choicesRND,
-  			correctAnswer: correctAnswer,
-  			button_html: '<img class="jspsych-btn" src="%choice%" style="border: 5px solid transparent"></img>',
-        labels: ["<br>1<br>I am guessing", "<br>2<br>I am not confident", "<br>3<br>I am quite confident", "<br>4<br>I am very confident"],
-        intervals: 4,
-        confidence_radios: true,
-  			//store extra info on the trial
-  			data: {
-  				target: target,
-  				choice1: choicesRND[0],
-  				choice2: choicesRND[1],
-  				choice3: choicesRND[2],
-  				choice4: choicesRND[3],
-  				correctAnswer: correctAnswer,
-  				trialType: "practice_trial"
-  			 }
-  		};
-
-  		//add test trial to the timeline
-  		timeline.push(practice_trial);
-  	};
-
-  var experimental_instructions = {
-       type: "text-button_V2",
-       text: "<p>You will now begin the main experiment.</p>" +
-         "<p>There will be <b>80 trials</b> like those you just did</p>" +
-         "<p>Touch START to begin the trials.</p>"
-     };
-  timeline.push(experimental_instructions);
-
-
-    for (i = 0; i < exp_trials_array.length; i++) {
-
-    	//define key variables based on test trialList (test_array)
-    	target=addImagePath(exp_trials_array[i].target);
-    	choices=[addImagePath(exp_trials_array[i].choiceA),addImagePath(exp_trials_array[i].choiceB),addImagePath(exp_trials_array[i].choiceC),addImagePath(exp_trials_array[i].choiceD)];
-    	choicesRND = jsPsych.randomization.shuffle(choices);
-    	correctAnswer=addImagePath(exp_trials_array[i].correctAnswer);
-
-      var experimental_trial = {
-          type: 'button-response-revised_V3',
-          randomize_order: true,
-          //timing_response: -1,
-          prompt: "Which of the four images best goes with the top image?",
-          stimulus: target,
-          choices: choicesRND,
-          correctAnswer: correctAnswer,
-          button_html: '<img class="jspsych-btn" src="%choice%" style="border: 5px solid transparent"></img>',
-          labels: ["<br>1<br>I am guessing", "<br>2<br>I am not confident", "<br>3<br>I am quite confident", "<br>4<br>I am very confident"],
-          intervals: 4,
-          confidence_radios: true,
-          //store extra info on the trial
-          data: {
-            target: target,
-            choice1: choicesRND[0],
-            choice2: choicesRND[1],
-            choice3: choicesRND[2],
-            choice4: choicesRND[3],
-            correctAnswer: correctAnswer,
-            trialType: "experimental_trial"
-           }
-        };
-
-    		timeline.push(experimental_trial);
-
+    let shuffle = function (a) {
+      let j, x, i;
+      for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+      }
     };
 
-    //Create end/thanks message
-var endmessage = "Thank you for participating!"
+    // shuffle the stimuli
+    let prac_trials_array = jsPsych.randomization.shuffle(practice_array);
+    let exp_trials_array = jsPsych.randomization.shuffle(Hit_array);
 
-//function for Javascript-PHP communication
-function saveData(filename, filedata){
-$.ajax({
-       type:'post',
-       cache: false,
-       url: 'save_data.php', // this is the path to the above PHP script
-       data: {filename: filename, filedata: filedata}
-       });
-};
+    // ask user for id
+    let id = prompt("Bitte geben Sie unten Ihre Versuchspersonennummer ein.");
+    jsPsych.data.addProperties({ subject: id });
 
-jsPsych.init({
-	timeline: timeline,
-	display_element: $('#jspsych-target'),
-	default_iti: 0,
-	on_finish: function() {
-    jsPsych.data.localSave("NVV_"+subject_id+".csv", "csv");
-		jsPsych.endExperiment(endmessage);
-		//Display new data created above as variable data
-		//jsPsych.data.displayData();
+    // show a welcome text
+    let welcome_block = {
+      type: "text",
+      text: "<br><br><strong><p style ='font-size: 30px'>Herzlich willkommen!</p></strong> Drücken Sie eine beliebige Taste, um die Anweisungen zu sehen.",
+    };
 
-		//uncomment saveData() line to save the data to server
-		//saveData("dimMediation_"+subject_id+".csv", jsPsych.data.dataAsCSV());
-		}
-	});
+    // To turn image names into strings with correctly specified paths
+    function addImagePath(imageName) {
+      return "imgNew/" + imageName + ".jpg";
+    }
 
+    let instTarget = addImagePath("verbStudyexample");
+    let instructions_block = {
+      type: "text-image-button_V2",
+      text:
+        "<p><b>ANWEISUNG</b></p>" +
+        "<p>Auf jeder Bildschirmseite sehen Sie ein Bild am oberen Bildschirmrand und vier Bilder darunter. Sie werden aufgefordert, auszuwählen, welches der vier Bilder am besten zum oberen Bild passt.</p>" +
+        "<p>Im folgenden Beispiel wäre Bild A die richtige Antwort, weil die beiden Kaninchen zusammenpassen.</p>" +
+        "<p>Nachdem Sie Ihre Wahl getroffen haben, werden Sie gebeten, anzugeben, wie sehr Sie von Ihrer Wahl überzeugt sind. Sie können wählen zwischen:</p>" +
+        "<p>1 = Ich rate; 2 = Ich bin mir nicht sicher; 3 = Ich bin mir ziemlich sicher; oder 4 = Ich bin mir sehr sicher</p>" +
+        "<p>Klicken Sie auf WEITER um fortzufahren.</p>",
+      stimulus: instTarget,
+    };
 
-</script>
+    let practice_instructions = {
+      type: "text-button_V2",
+      text:
+        "<p><br><br>Bitte wählen Sie für die nächsten vier Durchgänge das Bild aus, das dem obigen Bild am besten entspricht, und geben Sie dann an, wie überzeugt Sie von Ihrer Wahl sind.</p>" +
+        "<p>Klicken Sie auf START um zu beginnen.</p>",
+    };
+
+    // Set Non-verbal Practice Trials
+    let practice_trials = [];
+    for (i = 0; i < prac_trials_array.length; i++) {
+      //define key variables based on test trialList (test_array)
+      target = addImagePath(prac_trials_array[i].target);
+      choices = [
+        addImagePath(prac_trials_array[i].choiceA),
+        addImagePath(prac_trials_array[i].choiceB),
+        addImagePath(prac_trials_array[i].choiceC),
+        addImagePath(prac_trials_array[i].choiceD),
+      ];
+      choicesRND = jsPsych.randomization.shuffle(choices);
+      correctAnswer = addImagePath(prac_trials_array[i].correctAnswer);
+      let practice_trial = {
+        type: "button-response-revised_V3",
+        randomize_order: true,
+        prompt: "Welches der vier Bilder passt am besten zum oberen Bild?",
+        stimulus: target,
+        choices: choicesRND,
+        correctAnswer: correctAnswer,
+        button_html:
+          '<img class="jspsych-btn" src="%choice%" style="border: 5px solid transparent"></img>',
+        labels: [
+          "<br>1<br>Ich rate",
+          "<br>2<br>Ich bin mir nicht sicher",
+          "<br>3<br>Ich bin mir ziemlich sicher",
+          "<br>4<br>Ich bin mir sehr sicher",
+        ],
+        intervals: 4,
+        confidence_radios: true,
+        data: {
+          target: target,
+          choice1: choicesRND[0],
+          choice2: choicesRND[1],
+          choice3: choicesRND[2],
+          choice4: choicesRND[3],
+          correctAnswer: correctAnswer,
+          trialType: "practice_trial",
+        },
+      };
+      practice_trials.push(practice_trial);
+    }
+
+    let experimental_instructions = {
+      type: "text-button_V2",
+      text:
+        "<p>Sie beginnen nun mit dem Hauptexperiment.</p>" +
+        "<p>Es werden Ihnen jetzt insgesamt 80 Aufgaben dieser Art gestellt werden.</p>" +
+        "<p>Klicken Sie auf START um zu beginnen.</p>",
+    };
+
+    let experimental_trials = [];
+    for (i = 0; i < exp_trials_array.length; i++) {
+      target = addImagePath(exp_trials_array[i].target);
+      choices = [
+        addImagePath(exp_trials_array[i].choiceA),
+        addImagePath(exp_trials_array[i].choiceB),
+        addImagePath(exp_trials_array[i].choiceC),
+        addImagePath(exp_trials_array[i].choiceD),
+      ];
+      choicesRND = jsPsych.randomization.shuffle(choices);
+      correctAnswer = addImagePath(exp_trials_array[i].correctAnswer);
+      let experimental_trial = {
+        type: "button-response-revised_V3",
+        randomize_order: true,
+        prompt: "Welches der vier Bilder passt am besten zum oberen Bild?",
+        stimulus: target,
+        choices: choicesRND,
+        correctAnswer: correctAnswer,
+        button_html:
+          '<img class="jspsych-btn" src="%choice%" style="border: 5px solid transparent"></img>',
+        labels: [
+          "<br>1<br>Ich rate",
+          "<br>2<br>Ich bin mir nicht sicher",
+          "<br>3<br>Ich bin mir ziemlich sicher",
+          "<br>4<br>Ich bin mir sehr sicher",
+        ],
+        intervals: 4,
+        confidence_radios: true,
+        data: {
+          target: target,
+          choice1: choicesRND[0],
+          choice2: choicesRND[1],
+          choice3: choicesRND[2],
+          choice4: choicesRND[3],
+          correctAnswer: correctAnswer,
+          trialType: "experimental_trial",
+        },
+      };
+      experimental_trials.push(experimental_trial);
+    }
+
+    // Create end/thanks message
+    let endtrial = {
+      type: "text",
+      text:
+        "<p style ='font-size: 20px'><strong>Super! Sie sind mit dieser Aufgabe fertig! Vielen Dank für Ihre Teilnahme!</p>" +
+        "<p style ='font-size: 20px'>Sie können der Forscherin sagen, dass Sie bereit sind.</strong></p>",
+    };
+
+    // add timestamp
+    let timestamp = new Date().toISOString().replace(/z|t/gi, " ").trim();
+    jsPsych.data.addProperties({ date: timestamp });
+
+    jsPsych.pluginAPI.preloadImages(images, function () {
+      startExperiment();
+    });
+
+    let preloader = {
+      type: "call-function",
+      async: true,
+      func: function (done) {
+        jsPsych.getDisplayElement().innerHTML =
+          "<p>Loading... Please wait.</p>";
+        jsPsych.pluginAPI.preloadImages(images, function () {
+          done({ preload: "success" });
+        });
+      },
+    };
+
+    let timeline = [
+      preloader,
+      welcome_block,
+      instructions_block,
+      practice_instructions,
+      ...practice_trials,
+      experimental_instructions,
+      ...experimental_trials,
+      endtrial,
+    ];
+
+    let endmessage =
+      "Bitte klicken Sie auf nichts anderes und warten Sie, bis die Forscherin kommt.";
+  function startExperiment(){
+
+    jatos.onLoad(function () {
+      jsPsych.init({
+        timeline: timeline,
+        display_element: $("#jspsych-target"),
+        default_iti: 0,
+        fullscreen: true,
+        on_finish: function () {
+          jatos.endStudy(jsPsych.data.dataAsCSV());
+          jsPsych.endExperiment(endmessage);
+        },
+      });
+    })
+  };
+  </script>
 </html>
