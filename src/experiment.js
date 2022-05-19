@@ -87,7 +87,7 @@ export async function run({ assetPaths, input = {}, environment }) {
     show_clickable_nav: true,
   };
 
-  const items = require("../items/example.json");
+  const items = require("../items/first.json");
   const semanticMemoryExperiment = {
     timeline: [
       {
