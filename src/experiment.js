@@ -1,6 +1,6 @@
 /**
- * @title RatingTask
- * @description Rating task for big fun
+ * @title RatingTaskSM
+ * @description Select bottom image that best goes with top image
  * @version 0.1.0
  *
  * The following lines specify which media directories will be packaged and
@@ -122,9 +122,7 @@ export async function run({ assetPaths, input = {}, environment }) {
   switch (environment) {
     case "development":
     case "production": {
-      jsPsych.data
-        .get()
-        .localSave("csv", `WPV_subject${subject}_${timestamp}.csv`);
+      jsPsych.data.get().localSave("csv", `WPV_subject${subject}_${timestamp}.csv`);
       break;
     }
     case "jatos": {
