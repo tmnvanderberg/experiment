@@ -10,6 +10,16 @@
     "cues": ["2A", "2B", "2C", "2D"]
   },
   {
+    "linking_word": "through",
+    "target":"B1T_through",
+    "cues": ["B1A", "B1B", "B1C", "B1D", "B1B"]
+  },
+  {
+    "linking_word": "whole",
+    "target": "B2T_whole",
+    "cues": ["B2A", "B2B", "B2C", "B2D", "B2B"]
+  },
+  {
     "linking_word": "justice",
     "target": "3T_justice",
     "cues": ["3A", "3B", "3C", "3D"]
@@ -218,11 +228,6 @@
     "cues": ["53A", "53B", "53C", "53D"]
   },
   {
-    "linking_word": "identification",
-    "target": "B6T_identification",
-    "cues": ["B6A", "B6B", "B6C", "B6D"]
-  },
-  {
     "linking_word": "airport",
     "target": "A2T_airport",
     "cues": ["A2A", "A2B", "A2C", "A2D"]
@@ -241,16 +246,6 @@
     "linking_word": "disco",
     "target": "A9T_disco",
     "cues": ["A9A", "A9B", "A9C", "A9D"]
-  },
-  {
-    "linking_word": "memory",
-    "target": "B4T_memory",
-    "cues": ["B4A", "B4B", "B4C", "B4D"]
-  },
-  {
-    "linking_word": "identification",
-    "target": "B6T_identification",
-    "cues": ["B6A", "B6B", "B6C", "B6D"]
   },
   {
     "linking_word": "fast",
