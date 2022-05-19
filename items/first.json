@@ -12,12 +12,12 @@
   {
     "linking_word": "through",
     "target":"B1T_through",
-    "cues": ["B1A", "B1B", "B1C", "B1D", "B1B"]
+    "cues": ["B1A", "B1B", "B1C", "B1D"]
   },
   {
     "linking_word": "whole",
     "target": "B2T_whole",
-    "cues": ["B2A", "B2B", "B2C", "B2D", "B2B"]
+    "cues": ["B2A", "B2B", "B2C", "B2D"]
   },
   {
     "linking_word": "justice",
