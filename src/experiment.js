@@ -43,6 +43,8 @@ import jsPsychFullscreen from "@jspsych/plugin-fullscreen";
 export async function run({ assetPaths, input = {}, environment }) {
   const jsPsych = initJsPsych();
 
+  console.log("Environment is:", environment);
+
   let enter_fullscreen = {
     type: jsPsychFullscreen,
     fullscreen_mode: true,
